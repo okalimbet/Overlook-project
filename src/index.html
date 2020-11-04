@@ -1,13 +1,184 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Overlook</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <!-- <h1>Webpack Starter Kit</h1> -->
+    <nav>
+      <div class="greeting">
+        <h1 class="title-text">Hello <span id="user-name">Mike</span>!</h1>
+        <h1 class="title-text hidden">Dashboard - <span id="user-name">Mike</span></h1>
+        <button class="light-button hidden" id="user-book">BOOK A ROOM</button>
+      </div>
+    </nav>
+  <article class="login-page">
+    <div class="card">
+      <h2>Log-In Account</h2>
+      <form>
+        <div class="input-border">
+          <input type="text" class="text" required>
+          <label>Username</label>
+          <div class="border"></div>
+        </div>
+        <div class="input-border">
+          <input type="password" class="text" required>
+          <label>Password</label>
+          <div class="border"></div>
+        </div>
+         <input href="#" type="submit" class="btn" value="Log In">
+      </form>
+    </div>
+  </article>
+  <article class="manager-view">
+    <section class="manager-view__information">
+      <h2>Information for Today</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3 class="card-title">Total Revenue</h3>
+          <p class="card-info">Date: <span id="today-date">11/03/2020</span></p>
+          <p id="today-revenue" class="card-info">Revenue: <span id="today-revenue">11/03/2020</span></p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Available Rooms</h3>
+          <p class="card-info">Available Rooms: <span id="available-rooms">50</span></p>
+          <p id="today-revenue" class="card-info">Revenue: <span id="today-revenue">11/03/2020</span></p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Occupied vs Available Rooms</h3>
+        </div>
+      </div>
+    </section>
+    <section class="manager-view__user-info">
+      <div class="user-info-details">
+        <input type="text" class="text" required>
+        <label class="form-titles">User ID</label>
+      </div>
+      <div class="user-info-input">
+        <div class="form-titles">Name: <span id="user-name">Same</span></div>
+        <div class="form-titles">Total amount: $<span id="user-total">6,0002.30</span></div>
+      </div>
 
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+      <div class="bookings-container">
+        <div class="card-container">
+          <div class="booking-card">
+            <div class="card-left-side">
+              <img>
+              <div class="card-details">
+                <div class="cr-title">RoomType</div>
+                <div class="cr-date">Date: <span id="date-booking">11/03/2020</span></div>
+                <div class="cr-status">Upcoming</div>
+                <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+              </div>
+            </div>
+            <div class="card-right-side">
+              <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+            </div>
+          </div>
+          <button id="delete-booking" class="light-button">DELETE</button>
+        </div>
+      </div>
 
+    </section>
+    <section class="manager-view__book-room">
+      <div class="user-info-details">
+        <label class="form-titles">Add reservation for a customer: </label>
+        <input type="text" class="text" required placeholder="User ID">
+      </div>
+      <div class="user-info-details">
+        <div class="left-side-container">
+          <label class="form-titles">Choose date: </label>
+          <input type="text" class="text" required placeholder="User ID">
+          <label class="form-titles">Choose a room type: </label>
+          <input type="text" class="text" required placeholder="User ID">
+        </div>
+        <p id="no-rooms-message">We apologize for the inconvinience,<br>
+          there are no available rooms matching your search criterias.<br>
+          Please, try another date or room type!</p>
+      </div>
+      <div class="available-rooms-container">
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">3</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">500.00</span></p>
+          <button class="room-button">BOOK</button>
+        </div>
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
+          <button class="room-button">BOOK</button>
+        </div>
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
+          <button class="light-button">BOOK</button>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <article class="user-view">
+    <section class="user-view__reservations"
+      <h2>Your Bookings</h2>
+      <div class="bookings-container">
+        <div class="card-container">
+          <div class="booking-card">
+            <div class="card-left-side">
+              <img>
+              <div class="card-details">
+                <div class="cr-title">RoomType</div>
+                <div class="cr-date">Date: <span id="date-booking">11/03/2020</span></div>
+                <div class="cr-status">Upcoming</div>
+                <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+              </div>
+            </div>
+            <div class="card-right-side">
+              <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+            </div>
+          </div>
+          <button id="delete-booking" class="light-button">DELETE</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="user-view__book-room">
+      <h1 class="title-text">Book a Room</h1>
+      <div class="user-info-details">
+        <div class="left-side-container">
+          <label class="form-titles">Choose date: </label>
+          <input type="text" class="text" required placeholder="User ID">
+          <label class="form-titles">Choose a room type: </label>
+          <input type="text" class="text" required placeholder="User ID">
+        </div>
+        <p id="no-rooms-message">We apologize for the inconvinience,<br>
+          there are no available rooms matching your search criterias.<br>
+          Please, try another date or room type!</p>
+      </div>
+      <div class="available-rooms-container">
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">3</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">500.00</span></p>
+          <button class="room-button">BOOK</button>
+        </div>
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
+          <button class="room-button">BOOK</button>
+        </div>
+        <div class="room-card">
+          <img class="room-img">
+          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
+          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
+          <button class="light-button">BOOK</button>
+        </div>
+      </div>
+    </section>
+
+  </article>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
