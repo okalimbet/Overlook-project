@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../src/css/
+    styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <title>Overlook</title>
   </head>
   <body>
     <!-- <h1>Webpack Starter Kit</h1> -->
     <nav>
       <div class="greeting">
-        <h1 class="title-text">Hello <span id="user-name">Mike</span>!</h1>
-        <h1 class="title-text hidden">Dashboard - <span id="user-name">Mike</span></h1>
+        <h1 class="title-text-light">Hello <span id="user-name">Mike</span>!</h1>
+        <h1 class="title-text-light hidden">Dashboard - <span id="user-name">Mike</span></h1>
         <button class="light-button hidden" id="user-book">BOOK A ROOM</button>
       </div>
     </nav>
   <article class="login-page">
-    <div class="card">
-      <h2>Log-In Account</h2>
+    <!-- <img src="../images/tokyo-city.jpg" alt="building-image"> -->
+    <div class="login-page__box hidden">
+      <h2>Login</h2>
+      <h3 class="">You have entered an invalid username or password</h3>
       <form>
         <div class="input-border">
           <input type="text" class="text" required>
@@ -32,26 +38,37 @@
   </article>
   <article class="manager-view">
     <section class="manager-view__information">
-      <h2>Information for Today</h2>
+      <h2 class="view-headers-dark">Information for Today</h2>
+      <!-- <section class="card-box"> -->
       <div class="info-cards">
         <div class="card">
-          <h3 class="card-title">Total Revenue</h3>
+          <h3 class="card-title-light">Total Revenue</h3>
           <p class="card-info">Date: <span id="today-date">11/03/2020</span></p>
           <p id="today-revenue" class="card-info">Revenue: <span id="today-revenue">11/03/2020</span></p>
         </div>
         <div class="card">
-          <h3 class="card-title">Available Rooms</h3>
-          <p class="card-info">Available Rooms: <span id="available-rooms">50</span></p>
-          <p id="today-revenue" class="card-info">Revenue: <span id="today-revenue">11/03/2020</span></p>
+          <h3 class="card-title-light">Available Rooms</h3>
+          <p class="card-info">Available Rooms:</p>
+          <span class="card-info" id="available-rooms">50</span>
+          <!-- <p id="rooms-number" class="card-info"><span id="today-revenue">50</span></p> -->
         </div>
         <div class="card">
-          <h3 class="card-title">Occupied vs Available Rooms</h3>
+          <h3 class="card-title-light">Occupied vs Available Rooms</h3>
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle"
+              stroke-dasharray="60, 100"
+              d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"
+            />
+            <text x="18" y="20.35" id="percentage">30%</text>
+          </svg>
         </div>
       </div>
     </section>
     <section class="manager-view__user-info">
       <div class="user-info-details">
-        <input type="text" class="text" required>
+        <input type="text" class="text" required placeholder="blah">
         <label class="form-titles">User ID</label>
       </div>
       <div class="user-info-input">
@@ -119,7 +136,7 @@
     </section>
   </article>
 
-  <article class="user-view">
+  <article class="user-view hidden">
     <section class="user-view__reservations"
       <h2>Your Bookings</h2>
       <div class="bookings-container">

@@ -1,0 +1,251 @@
+//colors
+//$colorDarkBlueNav #01161E
+//colorDarkPrimary #124559
+//colorLightPrimary #EFF6E0
+
+//colorMiddleToneSecondary #598392
+//colorMiddleLightToneSecondary #AEC3B0
+//manager-view
+*{
+padding: 0;
+margin: 0;
+outline: none;
+}
+
+html {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+//
+//
+
+.greeting {
+  background: #01161E;
+  height: 3em;
+  text-align: left;
+  display: flex;
+  align-items: center;
+
+}
+
+.title-text-light {
+  color: #EFF6E0;
+  margin-left: 1em;
+}
+
+.login-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #124559;
+}
+
+.login-page__box {
+  width: 380px;
+  height: 350px;
+  padding: 25px;
+  box-shadow: 0 0 8px black;
+  background: #124559;;
+  opacity: 1;
+}
+
+h2 {
+  color: #EFF6E0;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+h2:before {
+  // content: "";
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background: #EFF6E0;
+  top: 70px;
+  left: 10%;
+}
+
+h3 {
+  color: #EFF6E0;
+  text-align: center;
+  font-size: 1em;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
+form {
+  margin-top: 60px;
+}
+.input-border {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.text {
+  width: 95%;
+  height: 100%;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 2px solid #598392;
+  background: none;
+  font-size: 18px;
+  color: #EFF6E0;
+}
+
+.border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #EFF6E0;
+}
+
+.text:focus ~ .border,
+.text:valid ~ .border {
+  width: 100%;
+}
+
+label{
+  position: absolute;
+  top: 8px;
+  left: 14px;
+  color: #598392;
+  pointer-events: none;
+  font-size: 18px;
+  transition: .5s;
+}
+
+.text:focus ~ label,
+.text:valid ~ label{
+  top: -12px;
+  left: 0;
+  color: #EFF6E0;
+  font-size: 14px;
+}
+
+.btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  background: none;
+  border: 2px solid #598392;
+  color: #598392;
+  font-size: 18px;
+  transition: .4s;
+}
+
+.btn:hover {
+  border: 2px solid #EFF6E0;
+  color: #EFF6E0;
+}
+
+.btn:focus {
+  border: 2px solid #124559;
+  color: #124559;
+  background: #EFF6E0;
+}
+
+.hidden {
+  display: none;
+}
+
+
+////////////
+.manager-view {
+  // display: flex;
+  // flex-direction: column;
+}
+
+.manager-view__information{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.view-headers-dark {
+  color: #01161E;
+  height: 3em;
+  margin: 1em 0 1em 0;
+}
+
+div.info-cards {
+  height: auto;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1em 1em 1em 1em;
+  border: 1px solid blue;
+  width: 20em;
+  height: 30em;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title-light {
+  height: 2em;
+  background: #124559;
+  width: 20em;
+}
+
+.card-info {
+  font-size: 1.5em;
+  // text-align: center;
+  height: 30px;
+  color: #124559;
+  float: left;
+  margin: 5em auto 1em auto;
+}
+
+#available-rooms{
+  font-size: 6em;
+  margin: 0.5em auto;
+  text-align: center;
+}
+
+//diagram
+
+.circular-chart {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+.circle {
+  stroke: #4CC790;
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+  #percentage {
+  // fill: #666;
+  font-family: sans-serif;
+  font-size: 0.4em;
+  text-anchor: middle;
+}
