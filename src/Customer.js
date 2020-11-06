@@ -1,5 +1,8 @@
-class Customer {
+import Hotel from './Hotel'
+
+class Customer extends Hotel {
   constructor(id, name) {
+    super([], [], [])
     this.id = id,
     this.name = name
   }

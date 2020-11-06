@@ -27,31 +27,23 @@ describe('BookingRepo', function() {
 
   it('should have no bookings if no data provided', function() {
     const bookingRepoOne = new BookingRepo();
-    expect(bookingRepoOne.bookingData).to.deep.equal([]);
+    expect(bookingRepoOne.bookingRepo).to.deep.equal([]);
   });
 
   it('should have data as an instance of an Array', function() {
-    expect(bookingRepo.bookingData).to.be.a.instanceOf(Array);
+    expect(bookingRepo.bookingRepo).to.be.a.instanceOf(Array);
   });
 
   it('should have instances of Booking in data', () => {
-    let result = bookingRepo.bookingData.every(booking => {
+    let result = bookingRepo.bookingRepo.every(booking => {
       return (booking instanceof Booking);
     });
 
     expect(result).to.equal(true);
   });
 
-  it('should filter through bookings by userID', () => {
-    expect(bookingRepo.getBookingsById("5fwrgu4i7k55hl7q8")).to.deep.equal([booking1]);
-  });
-
   it('should filter through bookings by date and userID', () => {
     expect(bookingRepo.getBookingsByUserIdAndDate(13, "2020/02/10")).to.deep.equal([booking2]);
-  });
-
-  it('should filter through bookings by date', () => {
-    expect(bookingRepo.getBookingsByDate("2020/01/24")).to.deep.equal([booking1]);
   });
 
   it('should calculate the total of service charges for chosen range of rooms', function() {
@@ -66,6 +58,6 @@ describe('BookingRepo', function() {
     booking1.roomServiceCharges = roomCharges1;
     booking2.roomServiceCharges = roomCharges2;
 
-    expect(bookingRepo.getTotalOfAllRoomCharges(bookingRepo.bookingData)).to.equal('39.10');
+    expect(bookingRepo.getTotalOfAllRoomCharges(bookingRepo.bookingRepo)).to.equal('39.10');
   });
 });

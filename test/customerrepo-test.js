@@ -28,7 +28,7 @@ describe('CustomerRepo', function() {
     expect(customerRepo.customerRepo).to.be.a.instanceOf(Array);
   });
 
-  it('should have instances of Booking in data', () => {
+  it('should have instances of Customer in data', () => {
     let result = customerRepo.customerRepo.every(user => {
       return (user instanceof Customer);
     });

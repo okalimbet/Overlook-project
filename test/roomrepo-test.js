@@ -46,26 +46,6 @@ describe('RoomRepo', function() {
     expect(result).to.equal(true);
   });
 
-  it('should filter through rooms by room number', () => {
-    expect(roomRepo.getRoomByNumber(2, roomRepo.roomRepo)).to.deep.equal([room2]);
-  });
-
-  it('should filter through rooms by room type', () => {
-    expect(roomRepo.filterRoomsByType('suite', roomRepo.roomRepo)).to.deep.equal([room2, room4]);
-  });
-
-  it('should filter through rooms by bidet availability', () => {
-    expect(roomRepo.filterRoomsByBidetAvailability(false, roomRepo.roomRepo)).to.deep.equal([room1, room3]);
-  });
-
-  it('should filter through rooms by bed size', () => {
-    expect(roomRepo.filterRoomsByBedSize('twin', roomRepo.roomRepo)).to.deep.equal([room2, room3]);
-  });
-
-  it('should filter through rooms by number of beds', () => {
-    expect(roomRepo.filterRoomsByNumBeds(1, roomRepo.roomRepo)).to.deep.equal([room3, room4]);
-  });
-
   it('should filter through rooms by price in desc', () => {
     expect(roomRepo.filterRoomsByCostPerNightDesc(roomRepo.roomRepo)).to.deep.equal([room4, room2, room1, room3]);
   });
