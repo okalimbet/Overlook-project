@@ -45,7 +45,7 @@ describe('Manager', function() {
     bookings = [booking1, booking2];
     bookingRepo = new BookingRepo(bookings);
 
-    manager = new Manager(roomRepo.roomRepo, bookingRepo.bookingData, customerRepo.customerRepo)
+    manager = new Manager(roomRepo.roomRepo, bookingRepo.bookingRepo, customerRepo.customerRepo)
   });
 
   it('should be a function', () => {
@@ -57,11 +57,11 @@ describe('Manager', function() {
   });
 
   it('should filter data by certain value', () => {
-    expect(manager.getAvailabilityOfRoomsPercentage(manager.bookingData, manager.roomRepo, "2020/01/24")).to.equal(75)
+    expect(manager.getAvailabilityOfRoomsPercentage(manager.bookingRepo, manager.roomRepo, "2020/01/24")).to.equal(75)
   });
 
   it('should get available Rooms on the certain date', () => {
-    expect(manager.getRevenueOnDate(manager.bookingData, manager.roomRepo, "2020/01/24")).to.equal(300.2)
+    expect(manager.getRevenueOnDate(manager.bookingRepo, manager.roomRepo, "2020/01/24")).to.equal(300.2)
   });
 
 });

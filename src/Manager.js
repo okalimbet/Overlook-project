@@ -1,21 +1,21 @@
 import Hotel from './Hotel'
 
 class Manager extends Hotel {
-  constructor(roomRepo = [], bookingData = [], customerRepo = []) {
-    super(bookingData, roomRepo, customerRepo),
+  constructor(roomRepo = [], bookingRepo = [], customerRepo = []) {
+    super(bookingRepo, roomRepo, customerRepo),
     this.roomRepo = roomRepo,
-    this.bookingData = bookingData,
+    this.bookingRepo = bookingRepo,
     this.customerRepo = customerRepo
   }
 
-  getAvailabilityOfRoomsPercentage(bookingData, roomRepo, date) {
-  	const bookedRooms = this.getAvailableRooms(bookingData, roomRepo, date);
+  getAvailabilityOfRoomsPercentage(bookingRepo, roomRepo, date) {
+  	const bookedRooms = this.getAvailableRooms(bookingRepo, roomRepo, date);
   	const percentage = Math.ceil(bookedRooms.length / roomRepo.length * 100);
   	return percentage;
   }
 
-  getRevenueOnDate(bookingData, roomRepo, date) {
-    let bookingByDate = this.getInformationByValue(date, bookingData, 'bookingDate');
+  getRevenueOnDate(bookingRepo, roomRepo, date) {
+    let bookingByDate = this.getInformationByValue(date, bookingRepo, 'bookingDate');
     return bookingByDate.reduce((revenue,  bookedRoom) => {
       roomRepo.forEach(room => {
         if(room.number === bookedRoom.roomNumber) {

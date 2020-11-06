@@ -2,28 +2,15 @@ import Hotel from './Hotel';
 import Booking from '../src/Booking';
 
 class BookingRepo extends Hotel {
-  constructor(bookingData = [], roomRepo = [], customerRepo = []) {
-    super(bookingData, roomRepo, customerRepo);
-    this.bookingData = bookingData;
+  constructor(bookingRepo = []) {
+    super(bookingRepo, [], []);
   }
 
-  getBookingsById(id) {
-	  return this.getInformationByValue(id, this.bookingData, 'id');
-	};
-
 	getBookingsByUserIdAndDate(userId, date) {
-		return this.bookingData.filter(booking => {
+		return this.bookingRepo.filter(booking => {
 			return (booking.userId === userId && booking.bookingDate === date);
 		})
 	}
-
-  getBookingsByUserId(userId) {
-		return this.getInformationByValue(userId, this.bookingData, 'userId');
-  }
-
-	getBookingsByDate(date) {
-		return this.getInformationByValue(date, this.bookingData, 'bookingDate');
-  }
 
   getTotalOfAllRoomCharges(rooms) {
     const totalAmount = rooms.reduce((total, booking) => {
