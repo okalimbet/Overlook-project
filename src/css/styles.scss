@@ -1,11 +1,6 @@
-//colors
-//$colorDarkBlueNav #01161E
-//colorDarkPrimary #124559
-//colorLightPrimary #EFF6E0
+@import "_variables";
+@import "_mixins";
 
-//colorMiddleToneSecondary #598392
-//colorMiddleLightToneSecondary #AEC3B0
-//manager-view
 *{
 padding: 0;
 margin: 0;
@@ -14,31 +9,46 @@ outline: none;
 
 html {
   margin: 0;
-  height: 100%;
+  height: $full-height;
 }
 
 body {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: $full-width;
+  height: $full-height;
   margin: 0;
+  font-family: 'Quicksand';
 }
 
-//
-//
+#welcome-title {
+  float: left;
+}
+#login__background {
+  width: $full-width;
+  filter: blur(5px);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  @include flex-row;
+  margin: auto 2em;
+}
 
 .greeting {
-  background: #01161E;
+  background: $color-dark-blue;
   height: 3em;
-  text-align: left;
-  display: flex;
+  @include flex-row;
   align-items: center;
-
+  justify-content: space-between;
 }
 
-.title-text-light {
-  color: #EFF6E0;
-  margin-left: 1em;
+.greeting__nav {
+  @include flex-row;
+  margin: auto 0em;
 }
 
 .login-page {
@@ -46,7 +56,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #124559;
+  background: $color-dark-primary;
 }
 
 .login-page__box {
@@ -54,12 +64,12 @@ body {
   height: 350px;
   padding: 25px;
   box-shadow: 0 0 8px black;
-  background: #124559;;
+  background: $color-dark-primary;;
   opacity: 1;
 }
 
 h2 {
-  color: #EFF6E0;
+  color: $color-light-primary;
   text-align: center;
   margin-bottom: 25px;
   font-size: 2em;
@@ -70,24 +80,25 @@ h2:before {
   position: absolute;
   width: 80%;
   height: 2px;
-  background: #EFF6E0;
+  background: $color-light-primary;
   top: 70px;
   left: 10%;
 }
 
 h3 {
-  color: #EFF6E0;
+  color: $color-light-primary;
   text-align: center;
   font-size: 1em;
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  @include auto-side-margins;
 }
-form {
+
+#login-form {
   margin-top: 60px;
 }
+
 .input-border {
-  width: 100%;
+  width: $full-width;
   height: 40px;
   position: relative;
   margin-bottom: 30px;
@@ -95,13 +106,13 @@ form {
 
 .text {
   width: 95%;
-  height: 100%;
+  height: $full-height;
   padding: 0 10px;
   border: none;
-  border-bottom: 2px solid #598392;
+  border-bottom: 2px solid $color-secondary-middle-tone;
   background: none;
   font-size: 18px;
-  color: #EFF6E0;
+  color: $color-light-primary;
 }
 
 .border {
@@ -110,19 +121,19 @@ form {
   left: 0;
   width: 0;
   height: 2px;
-  background: #EFF6E0;
+  background: $color-light-primary;
 }
 
 .text:focus ~ .border,
 .text:valid ~ .border {
-  width: 100%;
+  width: $full-width;
 }
 
-label{
+.login-label{
   position: absolute;
   top: 8px;
   left: 14px;
-  color: #598392;
+  color: $color-secondary-middle-tone;
   pointer-events: none;
   font-size: 18px;
   transition: .5s;
@@ -132,98 +143,126 @@ label{
 .text:valid ~ label{
   top: -12px;
   left: 0;
-  color: #EFF6E0;
+  color: $color-light-primary;
   font-size: 14px;
 }
 
 .btn {
-  width: 100%;
+  width: $full-width;
   height: 50px;
   border-radius: 8px;
   background: none;
-  border: 2px solid #598392;
-  color: #598392;
+  border: 2px solid $color-secondary-middle-tone;
+  color: $color-secondary-middle-tone;
   font-size: 18px;
   transition: .4s;
 }
 
 .btn:hover {
-  border: 2px solid #EFF6E0;
-  color: #EFF6E0;
+  border: 2px solid $color-light-primary;
+  color: $color-light-primary;
 }
 
 .btn:focus {
-  border: 2px solid #124559;
-  color: #124559;
-  background: #EFF6E0;
+  border: 2px solid $color-dark-primary;
+  color: $color-dark-primary;
+  background: $color-light-primary;
+}
+
+.light-btn {
+  width: 6em;
+  height: 2em;
+  margin: auto 1em;
 }
 
 .hidden {
   display: none;
 }
 
-
-////////////
-.manager-view {
-  // display: flex;
-  // flex-direction: column;
+.navigation__item__title-light {
+  color: $color-light-primary;
+  margin-left: 1em;
 }
 
-.manager-view__information{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.navigation__item__title-light:hover {
+  border-bottom: 1px solid $color-light-primary;
+}
+////////////
+
+.manager-view__information {
+  @include flex-column;
+  width: $full-width;
 }
 
 .view-headers-dark {
-  color: #01161E;
-  height: 3em;
-  margin: 1em 0 1em 0;
+  color: $color-dark-blue;
+  height: 2em;
+  margin: 1.5em 0 1em 0;
 }
 
 div.info-cards {
   height: auto;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   justify-content: space-around;
-  width: 100%;
+  width: $full-width;
   flex-wrap: wrap;
+  margin: 1em auto;
 }
 
 .card {
-  margin: 1em 1em 1em 1em;
-  border: 1px solid blue;
-  width: 20em;
-  height: 30em;
-  display: flex;
-  flex-direction: column;
+  margin: 1em;
+  border: 2px solid $color-dark-primary;
+  width: $primary-size;
+  height: $secondary-size;
+  @include flex-column;
+}
+
+#today-date {
+  margin-top: 6em;
+  margin-bottom: 2em;
+  @include auto-side-margins;
 }
 
 .card-title-light {
+  // vertical-align: middle;
+}
+.card-title {
   height: 2em;
-  background: #124559;
-  width: 20em;
+  background: $color-dark-primary;
+  width: $primary-size;
+  justify-content: center;
+  @include flex-column;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .card-info {
   font-size: 1.5em;
   // text-align: center;
   height: 30px;
-  color: #124559;
+  color: $color-dark-primary;
   float: left;
-  margin: 5em auto 1em auto;
+  margin-top: 1em
+  margin-bottom: 1em;
+  @include auto-side-margins;
+  display: flex;
+  justify-content: center;
+  // align-content: center;
+  // text-align: center;
 }
 
 #available-rooms{
   font-size: 6em;
-  margin: 0.5em auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  @include auto-side-margins;
   text-align: center;
 }
 
 //diagram
 
 .circular-chart {
+  color: $color-dark-primary;
   display: block;
   margin: auto;
   max-width: 80%;
@@ -244,8 +283,245 @@ div.info-cards {
   }
 }
   #percentage {
-  // fill: #666;
+  color: $color-dark-primary;
   font-family: sans-serif;
   font-size: 0.4em;
   text-anchor: middle;
+}
+
+
+//manager-user card-details
+.manager-view__user-info {
+  height: auto;
+  @include flex-column;
+  justify-content: space-around;
+  width: $full-width;
+  flex-wrap: wrap;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @include auto-side-margins;
+  background: $color-dark-primary;
+  color: $color-light-primary;
+}
+
+.user-info-form {
+  @include flex-row;
+  margin: 2em 1em 0 1em;
+  align-items: center;
+}
+
+.user-info-details {
+  @include flex-row;
+  margin: 2em 1em 0 1em;
+}
+
+.manager-form-titles {
+  margin: 0em 1em 0 0;
+}
+
+#findBookingId {
+  margin: 0em 1em 0 1em;
+}
+
+#user-name {
+  margin-left: 0.3em;
+}
+
+#user-total {
+  margin-left: 0.3em;
+}
+
+.input-id {
+  width: 9em;
+  height: 1.5em;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 2px solid $color-secondary-middle-tone;
+  background: none;
+  font-size: 18px;
+  color: $color-light-primary;
+}
+.input-dark {
+  color: $color-dark-primary;
+}
+.bookings-container {
+  margin: 3em 1em;
+  height: $secondary-size;
+  width: auto;
+  f@include flex-column;
+  overflow: scroll;
+}
+
+.room-img {
+  height: 100px;
+}
+
+.booking-card {
+  @include flex-row;
+  height: $full-height;
+  width: $full-width;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-container {
+  @include flex-row;
+  padding: 1em;
+  background-color: $color-white;
+  color: $color-dark-primary;
+  font-size: 0.8em;
+  margin: 1em 0;
+  width: auto;
+  height: 10em;
+}
+
+.card-container:hover {
+  box-shadow: 2px 2px 8px $color-light-primary;
+}
+
+.card-details {
+  margin: auto 1em;
+}
+
+.room-detail {
+  margin: 0.4em;
+}
+
+#price-booking {
+  font-size: 2em;
+}
+
+#delete-button {
+  height: 1.5em;
+  width: 7em;
+  margin-left: 1em;
+}
+
+.card-left-side {
+  @include flex-row;
+}
+///add reservatioin-manager
+
+.manager-view__book-room {
+  height: auto;
+  @include flex-column;
+  justify-content: space-around;
+  width: $full-width;
+  flex-wrap: wrap;
+  margin: 1em auto 0em 1em;
+  background: $color-white;
+  color: $color-dark-primary;
+}
+.user-info-details {
+  @include flex-row;
+}
+.dark-input {
+  color: $color-dark-primary;
+  margin-bottom: 1em;
+  width: 15em;
+}
+
+#no-rooms-message {
+  margin: auto 3em;
+  font-size: 1.5vw;
+}
+
+#manager-data-input {
+  margin: 1em 1em 0em 0em;
+}
+
+#manager-room-input {
+  margin: 0em 1em 0em 0em;
+}
+
+.left-side-container {
+  @include flex-column;
+}
+//
+.available-rooms-container {
+  height: 40em;
+  @include flex-row;
+  justify-content: space-around;
+  width: $full-width;
+  flex-wrap: wrap;
+  margin: 3em auto;
+  overflow: scroll;
+}
+
+
+.book-room-card {
+  margin: 1em;
+  width: 14em;
+  height: $primary-size;
+  @include flex-column;
+  color: $color-light-primary;
+  background-color: $color-dark-primary;
+  padding: 1em;
+  justify-content: space-between;
+}
+
+.book-room-card:hover {
+  box-shadow: 2px 2px 8px $color-dark-primary;
+}
+
+.book-room-img {
+  width: $full-width;
+  height: 8em;
+  margin-bottom: 1em;
+  border: 1px solid $color-light-primary;
+}
+
+.book-card-details {
+  @include flex-column;
+  align-items:  center;
+}
+
+.room-btn {
+  height: 2em;
+}
+
+.book-room-detail {
+  margin: 1em auto;
+}
+
+//userview - info-cards
+.user-view {
+  background-color: $color-dark-primary;
+}
+.user-view__reservations {
+  background-color: $color-dark-primary;
+  height: auto;
+  padding: 3em 0 0 0;
+  @include flex-column;
+  justify-content: space-around;
+  width: $full-width;
+  flex-wrap: wrap;
+  margin: 0em auto 2em auto;
+}
+
+.user-header-light {
+  margin: auto;
+  background-color: $color-dark-primary;
+  color: $color-light-primary;
+}
+
+//book a rooms
+.user-view__book-room {
+  background-color: $color-white;
+  margin: 1em 0em;
+  padding: 1em 1em;
+  width: $full-width;
+  height: 40em;
+}
+
+.user-book-room-title {
+  margin-top: 4em;
+}
+
+#total-spent {
+  font-size: 1.5em;
+  float: left;
+  position: absolute;
+  top: 6em;
+  left: 1em;
 }
