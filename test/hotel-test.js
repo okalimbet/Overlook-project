@@ -72,7 +72,7 @@ describe('Hotel', function() {
   });
 
   it('should get available Rooms on the certain date', () => {
-    expect(hotel.getTodayDate()).to.equal('2020/11/05')
+    expect(hotel.getTodayDate()).to.equal('2020/11/06')
   });
 
   it('should get available Rooms on the certain date', () => {
