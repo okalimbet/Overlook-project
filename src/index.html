@@ -1,59 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="max-age=0" />
+<!-- <meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" /> -->
     <link rel="stylesheet" href="../src/css/
     styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
     <title>Overlook</title>
   </head>
   <body>
+    <img class='hidden' id="login__background"src="../images/tokyo-city.jpg" alt="building-image">
     <!-- <h1>Webpack Starter Kit</h1> -->
-    <nav>
-      <div class="greeting">
-        <h1 class="title-text-light">Hello <span id="user-name">Mike</span>!</h1>
-        <h1 class="title-text-light hidden">Dashboard - <span id="user-name">Mike</span></h1>
-        <button class="light-button hidden" id="user-book">BOOK A ROOM</button>
+    <nav class="greeting">
+      <div id="manager-nav" class="greeting__nav hidden">
+        <h1 id="welcome-title" class="navigation__item__title-light">WELCOME</h1>
+        <ul class="navigation__list">
+          <li class="navigation__item"><a href="#manager-dashboard" class="navigation__item__title-light">Dashboard</a></li>
+          <li class="navigation__item"><a href="#manager-user-information" class="navigation__item__title-light">Users</a></li>
+          <li class="navigation__item"><a href="#manager-book-room" class="navigation__item__title-light">Book</a></li>
+        </ul>
       </div>
+      <div id="user-nav" class="greeting__nav">
+        <h1 id="user-title" class="navigation__item__title-light">Mike Wazowski</h1>
+        <ul class="navigation__list">
+          <li class="navigation__item"><a href="#user-reservations" class="navigation__item__title-light">Dashboard</a></li>
+          <li class="navigation__item"><a href="#user-book-room" class="navigation__item__title-light">Book</a></li>
+        </ul>
+      </div>
+      <button class="btn light-btn" id="log-out">Log Out</button>
     </nav>
-  <article class="login-page">
+  <article class="login-page hidden">
     <!-- <img src="../images/tokyo-city.jpg" alt="building-image"> -->
-    <div class="login-page__box hidden">
+    <div class="login-page__box">
       <h2>Login</h2>
       <h3 class="">You have entered an invalid username or password</h3>
-      <form>
+      <form id="login-form">
         <div class="input-border">
-          <input type="text" class="text" required>
-          <label>Username</label>
+          <input aria-labelledby="username" type="text" class="text" name="username-input" required>
+          <label class="login-label" id="username" for="username-input">Username</label>
           <div class="border"></div>
         </div>
         <div class="input-border">
-          <input type="password" class="text" required>
-          <label>Password</label>
+          <input aria-labelledby="user-password" type="password" class="text" name="password-input" required>
+          <label class="login-label"id="password" for="password-input">Password</label>
           <div class="border"></div>
         </div>
          <input href="#" type="submit" class="btn" value="Log In">
       </form>
     </div>
   </article>
-  <article class="manager-view">
-    <section class="manager-view__information">
+  <article class="manager-view hidden">
+    <section id="manager-dashboard"class="manager-view__information">
       <h2 class="view-headers-dark">Information for Today</h2>
       <!-- <section class="card-box"> -->
       <div class="info-cards">
         <div class="card">
-          <h3 class="card-title-light">Total Revenue</h3>
-          <p class="card-info">Date: <span id="today-date">11/03/2020</span></p>
-          <p id="today-revenue" class="card-info">Revenue: <span id="today-revenue">11/03/2020</span></p>
+          <div class="card-title">
+            <h3 class="card-title-light">TOTAL REVENUE</h3>
+          </div>
+          <!-- <div class="card-info"> -->
+          <p id="today-date" class="card-info">11/03/2020</p>
+          <p id="today-revenue" class="card-info">$ <span id="today-revenue">20300</span></p>
+        <!-- </div> -->
         </div>
         <div class="card">
-          <h3 class="card-title-light">Available Rooms</h3>
-          <p class="card-info">Available Rooms:</p>
-          <span class="card-info" id="available-rooms">50</span>
+          <div class="card-title">
+            <h3 class="card-title-light">AVAILABLE ROOMS</h3>
+          </div>
+          <div class="card-info">
+          <p class="" id="available-rooms">50</p>
+        </div>
           <!-- <p id="rooms-number" class="card-info"><span id="today-revenue">50</span></p> -->
         </div>
         <div class="card">
-          <h3 class="card-title-light">Occupied vs Available Rooms</h3>
+          <div class="card-title">
+            <h3 class="card-title-light">Occupied vs Available Rooms</h3>
+          </div>
           <svg viewBox="0 0 36 36" class="circular-chart">
             <path class="circle"
               stroke-dasharray="60, 100"
@@ -66,135 +93,151 @@
         </div>
       </div>
     </section>
-    <section class="manager-view__user-info">
+    <section id="manager-user-information" class="manager-view__user-info">
+      <form class="user-info-form">
+        <label class="manager-form-titles" id="findUserId" for="userIdInput" >User ID</label>
+        <input aria-labelledby="findUserId" min="0" type="text" class="input-id" name="userIdInput" required>
+        <label class="manager-form-titles" id="findBookingId" for="bookingIdInput">Booking ID</label>
+        <input aria-labelledby="findBookingId" min="0" type="text" class="input-id" name="userBookingInput" required>
+        <input href="#" type="submit" id="delete-button" class="btn" value="Delete">
+      </form>
       <div class="user-info-details">
-        <input type="text" class="text" required placeholder="blah">
-        <label class="form-titles">User ID</label>
-      </div>
-      <div class="user-info-input">
-        <div class="form-titles">Name: <span id="user-name">Same</span></div>
-        <div class="form-titles">Total amount: $<span id="user-total">6,0002.30</span></div>
+        <p class="manager-form-titles">Name:  <span id="user-name">Same</span></p>
+        <p class="manager-form-titles">Total amount:  $<span id="user-total">6,0002.30</span></p>
       </div>
 
       <div class="bookings-container">
         <div class="card-container">
           <div class="booking-card">
             <div class="card-left-side">
-              <img>
+              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
               <div class="card-details">
-                <div class="cr-title">RoomType</div>
-                <div class="cr-date">Date: <span id="date-booking">11/03/2020</span></div>
-                <div class="cr-status">Upcoming</div>
-                <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+                <p class="room-detail">RoomType</p>
+                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
+                <p class="room-detail">Upcoming</p>
               </div>
             </div>
             <div class="card-right-side">
               <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
             </div>
-          </div>
-          <button id="delete-booking" class="light-button">DELETE</button>
+           </div>
         </div>
-      </div>
-
-    </section>
-    <section class="manager-view__book-room">
-      <div class="user-info-details">
-        <label class="form-titles">Add reservation for a customer: </label>
-        <input type="text" class="text" required placeholder="User ID">
-      </div>
-      <div class="user-info-details">
-        <div class="left-side-container">
-          <label class="form-titles">Choose date: </label>
-          <input type="text" class="text" required placeholder="User ID">
-          <label class="form-titles">Choose a room type: </label>
-          <input type="text" class="text" required placeholder="User ID">
-        </div>
-        <p id="no-rooms-message">We apologize for the inconvinience,<br>
-          there are no available rooms matching your search criterias.<br>
-          Please, try another date or room type!</p>
-      </div>
-      <div class="available-rooms-container">
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">3</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">500.00</span></p>
-          <button class="room-button">BOOK</button>
-        </div>
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
-          <button class="room-button">BOOK</button>
-        </div>
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
-          <button class="light-button">BOOK</button>
-        </div>
-      </div>
-    </section>
-  </article>
-
-  <article class="user-view hidden">
-    <section class="user-view__reservations"
-      <h2>Your Bookings</h2>
-      <div class="bookings-container">
         <div class="card-container">
           <div class="booking-card">
             <div class="card-left-side">
-              <img>
+              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
               <div class="card-details">
-                <div class="cr-title">RoomType</div>
-                <div class="cr-date">Date: <span id="date-booking">11/03/2020</span></div>
-                <div class="cr-status">Upcoming</div>
-                <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+                <p class="room-detail">RoomType</p>
+                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
+                <p class="room-detail">Upcoming</p>
               </div>
             </div>
             <div class="card-right-side">
-              <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
+              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
             </div>
-          </div>
-          <button id="delete-booking" class="light-button">DELETE</button>
+           </div>
+        </div>
+        <div class="card-container">
+          <div class="booking-card">
+            <div class="card-left-side">
+              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+              <div class="card-details">
+                <p class="room-detail">RoomType</p>
+                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
+                <p class="room-detail">Upcoming</p>
+              </div>
+            </div>
+            <div class="card-right-side">
+              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
+            </div>
+           </div>
+        </div>
+        <div class="card-container">
+          <div class="booking-card">
+            <div class="card-left-side">
+              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+              <div class="card-details">
+                <p class="room-detail">RoomType</p>
+                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
+                <p class="room-detail">Upcoming</p>
+              </div>
+            </div>
+            <div class="card-right-side">
+              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
+            </div>
+           </div>
+        </div>
+        <div class="card-container">
+          <div class="booking-card">
+            <div class="card-left-side">
+              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+              <div class="card-details">
+                <p class="room-detail">RoomType</p>
+                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
+                <p class="room-detail">Upcoming</p>
+              </div>
+            </div>
+            <div class="card-right-side">
+              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
+            </div>
+           </div>
         </div>
       </div>
-    </section>
 
-    <section class="user-view__book-room">
-      <h1 class="title-text">Book a Room</h1>
+    </section>
+    <section id="manager-book-room" class="manager-view__book-room">
+      <div class="user-info-details">
+        <label class="manager-form-titles" id="manager-id-input" for="user-id-input" >Add reservation for a customer:</label>
+        <input aria-labelledby="manager-id-input" min="0" type="text" class="input-id input-dark" name="manager-id-input" required placeholder="User ID">
+      </div>
       <div class="user-info-details">
         <div class="left-side-container">
-          <label class="form-titles">Choose date: </label>
-          <input type="text" class="text" required placeholder="User ID">
-          <label class="form-titles">Choose a room type: </label>
-          <input type="text" class="text" required placeholder="User ID">
+          <label class="manager-form-titles" id="manager-data-input">Choose date: </label>
+          <input aria-labelledby="manager-data-input" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
+
+          <label class="manager-form-titles" id="manager-room-input" for="room-type-log">Choose a room type: </label>
+          <select aria-labelledby="manager-room-input" class="input-id dark-input" name="room-type-log" id="user__activities">
+            <option disabled selected value> -- choose a room type -- </option>
+            <option value="residential suite">residential suite</option>
+            <option value="suite">suite</option>
+            <option value="single room">single room</option>
+            <option value="junior suite">junior suite</option>
+          </select>
         </div>
-        <p id="no-rooms-message">We apologize for the inconvinience,<br>
+        <p id="no-rooms-message" class="">We apologize for the inconvinience,<br>
           there are no available rooms matching your search criterias.<br>
           Please, try another date or room type!</p>
       </div>
-      <div class="available-rooms-container">
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">3</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">500.00</span></p>
-          <button class="room-button">BOOK</button>
+      <!-- <div class="available-rooms-container"> -->
+        <div class="available-rooms-container">
+          <div id="" class="book-room-card">
+            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+            <div class="book-card-details">
+              <p class="book-room-detail">Room #<span id="room-number">3</p>
+              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
+            </div>
+            <input href="#" type="submit" class="btn room-btn" value="BOOK">
+            <!-- <button class='btn room-btn'>BOOK</button> -->
+          </div>
+          <div id="" class="book-room-card">
+            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+            <div class="book-card-details">
+              <p class="book-room-detail">Room#<span id="room-number">3</p>
+              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
+            </div>
+            <button class='btn room-btn'>BOOK</button>
+          </div>
+          <div id="" class="book-room-card">
+            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+            <div class="book-card-details">
+              <p class="book-room-detail">Room#<span id="room-number">3</p>
+              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
+            </div>
+            <button class='btn room-btn'>BOOK</button>
+          </div>
         </div>
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
-          <button class="room-button">BOOK</button>
-        </div>
-        <div class="room-card">
-          <img class="room-img">
-          <h3 class="room-title">Room # <span id="room-number">4</span></h3>
-          <p class="room-title">1 night $<span id="room-per-night">600.00</span></p>
-          <button class="light-button">BOOK</button>
-        </div>
-      </div>
-    </section>
 
+    </section>
   </article>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
