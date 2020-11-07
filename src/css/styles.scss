@@ -483,3 +483,45 @@ div.info-cards {
 .book-room-detail {
   margin: 1em auto;
 }
+
+//userview - info-cards
+.user-view {
+  background-color: $color-dark-primary;
+}
+.user-view__reservations {
+  background-color: $color-dark-primary;
+  height: auto;
+  padding: 3em 0 0 0;
+  @include flex-column;
+  justify-content: space-around;
+  width: $full-width;
+  flex-wrap: wrap;
+  margin: 0em auto 2em auto;
+}
+
+.user-header-light {
+  margin: auto;
+  background-color: $color-dark-primary;
+  color: $color-light-primary;
+}
+
+//book a rooms
+.user-view__book-room {
+  background-color: $color-white;
+  margin: 1em 0em;
+  padding: 1em 1em;
+  width: $full-width;
+  height: 40em;
+}
+
+.user-book-room-title {
+  margin-top: 4em;
+}
+
+#total-spent {
+  font-size: 1.5em;
+  float: left;
+  position: absolute;
+  top: 6em;
+  left: 1em;
+}
