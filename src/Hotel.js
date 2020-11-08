@@ -37,8 +37,8 @@ class Hotel {
   getAvailableRooms(bookingRepo, roomRepo, date) {
     let bookingByDate = this.getInformationByValue(date, bookingRepo, 'bookingDate');
     let availableRooms = roomRepo
-      .filter(room => bookingByDate
-      .some(booking => room.number !== booking.roomNumber));
+      .filter(room => !bookingByDate
+      .some(booking => room.number === booking.roomNumber));
   	return availableRooms;
   }
 }

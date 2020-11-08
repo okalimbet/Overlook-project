@@ -59,20 +59,20 @@ describe('Hotel', function() {
     expect(hotel).to.be.a.instanceOf(Hotel);
   });
 
-  it('should get available Rooms on the certain date', () => {
+  it('should filter data by certain value', () => {
     expect(hotel.getInformationByValue("2020/02/10", hotel.bookingRepo, 'bookingDate')).to.deep.equal([booking2])
   });
 
-  it('should filter data by certain value', () => {
+  it('should get available Rooms on the certain date', () => {
     expect(hotel.getAvailableRooms(hotel.bookingRepo, hotel.roomRepo, "2020/01/24")).to.deep.equal([room1, room2, room4])
   });
 
-  it('should get available Rooms on the certain date', () => {
+  it('should determine upcoming bookings ', () => {
     expect(hotel.determineUpcomingBookings(booking1)).to.equal('Completed')
   });
 
   it('should get available Rooms on the certain date', () => {
-    expect(hotel.getTodayDate()).to.equal('2020/11/06')
+    expect(hotel.getTodayDate()).to.equal('2020/11/08')
   });
 
   it('should get available Rooms on the certain date', () => {
