@@ -513,9 +513,9 @@ div.info-cards {
   padding: 3em 0 0 0;
   @include flex-column;
   justify-content: space-around;
-  width: $full-width;
+  width: auto;
   flex-wrap: wrap;
-  margin: 0em auto 2em auto;
+  margin: 0em 1em 1em 1em;
 }
 
 .user-header-light {
@@ -527,9 +527,9 @@ div.info-cards {
 //book a rooms
 .user-view__book-room {
   background-color: $color-white;
-  margin: 1em 0em;
+  margin: 1em 1em;
   padding: 1em 1em;
-  width: $full-width;
+  width: auto;
   height: auto;
 }
 
@@ -541,6 +541,6 @@ div.info-cards {
   font-size: 1.5em;
   float: left;
   position: absolute;
-  top: 4.5em;
+  top: 6em;
   left: 1em;
 }
