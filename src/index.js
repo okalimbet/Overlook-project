@@ -59,6 +59,7 @@ function createHotelData() {
 //
 // let customerView = document.getElementById('customer-page');
 // let customerNavBar = document.getElementById('user-nav');
+let listOfBookings = document.getElementById('manager-bookings-container');
 
 let loginBtn = document.getElementById('login-button');
 let logOutBtn = document.getElementById('log-out');
@@ -67,6 +68,7 @@ let deleteBtn = document.getElementById('delete-button');
 let username = document.getElementById('username-value');
 let password = document.getElementById('password-value');
 let managerUserIdInput = document.getElementById('manager-user-id');
+let availableRooms = [];
 
 loginBtn.addEventListener('click', checkUserLoginInfo);
 logOutBtn.addEventListener('click', logOutUsers);
@@ -115,11 +117,7 @@ function logOutUsers() {
 //   loginPageView.classList.add('hidden');
 // }
 //
-// function showLoginError(errorMessage) {
-//   let errorMessageElement = document.getElementById('login-error');
-//   errorMessageElement.classList.remove('hidden');
-//   errorMessageElement.innerText = errorMessage;
-// }
+
 //
 // function hideLoginError() {
 //   let errorMessageElement = document.getElementById('login-error');
@@ -143,6 +141,8 @@ function handleManagerLogin() {
   displayTotayDate();
   displayTotalAvailableRooms('2020/02/07');
   displayPercentageAvailableRooms('2020/02/07');
+  availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, '2020/02/07');
+  displayAvailbeRoomsByType(availableRooms);
   // displayBookings(hotelOverlook.getUserInfo, roomRepo, date)
 }
 
@@ -156,7 +156,7 @@ function checkUserLoginInfo(event) {
   let usernameValue = username.value;
   let passwordValue = password.value;
   if(passwordValue !== 'overlook2020') {
-    domDisplay.showLoginError('You have entered an invalid username or password');
+    domDisplay.showErrorMessage('You have entered an invalid username or password', 'login-error', 'remove');
     return;
   }
   if(usernameValue === "manager") {
@@ -167,10 +167,12 @@ function checkUserLoginInfo(event) {
   if(customerUsername === 'customer' && validateCustomerId(customerId)) {
     handleCustomerLogin(customerId);
   } else {
-    domDisplay.showLoginError('You have entered an invalid username or password');
+    domDisplay.showErrorMessage('You have entered an invalid username or password', 'login-error', 'remove');
   }
 }
 
+
+//------Manager-Today-Info-Page------//
 function displayTotalRevenue(date) {
   let todayRevenue = currentManager.getRevenueOnDate(bookingRepo.bookingRepo, roomRepo.roomRepo, date);
   document.getElementById('today-revenue').innerText = `$ ${todayRevenue.toFixed(2)}`;
@@ -181,7 +183,6 @@ function displayTotayDate() {
 }
 
 function displayTotalAvailableRooms(date) {
-  console.log(hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, date).length)
   document.getElementById('available-rooms').innerText = `${hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, date).length}`;
 }
 
@@ -198,7 +199,8 @@ function displayPercentageAvailableRooms(date) {
         <text x="18" y="20.35" id="percentage">${availabilityPercentage}%</text>
       `
 }
-let listOfBookings = document.getElementById('manager-bookings-container')
+
+//------Manager-Get-User-Info-Page------//
 function displayBookings(bookings, roomRepo, userId, customerRepo) {
   listOfBookings.innerHTML = '';
   let cards = hotelOverlook.getUserCardsRoomCards(bookings, roomRepo);
@@ -253,10 +255,126 @@ function displayCustomerName(userId, customerRepo) {
 
 function getUserInfo() {
   let userIdInput = managerUserIdInput.value;
-  console.log(userIdInput)
   if(!userIdInput) {
     return;
   }
   let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
   displayBookings(customerInfo, roomRepo, userIdInput, customerRepo);
+}
+
+//------Manager-Add-Reservation-Page------//
+let customerReserveRoomId = document.getElementById('manager-user-id-input');
+let managerDateInput = document.getElementById('manager-date-choice');
+let managerRoomTypeInput = document.getElementById('manager-room-types');
+let listOfAvailabelRooms = document.getElementById('available-rooms-wrapper');
+
+managerRoomTypeInput.addEventListener('change', filterAvailableRoomsType);
+managerDateInput.addEventListener('change', filterAvailableRoomsByDate);
+
+function filterAvailableRoomsByDate() {
+  if (this.value) {
+    let newDate = this.value.replaceAll('-', '/');
+    availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
+    displayAvailbeRoomsByType(availableRooms);
+    let dropDownMenu = document.querySelectorAll('select');
+    dropDownMenu.forEach(menu => {
+      menu.options[0].selected = 'selected'
+    })
+  } else {
+    domDisplay.showErrorMessage(
+      `We apologize for the inconvinience,<br>
+      there are no available rooms matching your search criterias.<br>
+      Please, try another date or room type!`, 'no-rooms-message', 'remove');
+  }
+
+}
+
+function filterAvailableRoomsType() {
+  let filteredRooms = [];
+  if (this.value === 'residential suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('residential suite', availableRooms, 'roomType');
+    displayAvailbeRoomsByType(filteredRooms)
+    return this.value;
+  } else if (this.value === 'suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('suite', availableRooms, 'roomType');
+    displayAvailbeRoomsByType(filteredRooms)
+    return this.value;
+  } else if (this.value === 'single room') {
+    filteredRooms = hotelOverlook.getInformationByValue('single room', availableRooms, 'roomType');
+    displayAvailbeRoomsByType(filteredRooms)
+    return this.value;
+  } else if (this.value === 'junior suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('junior suite', availableRooms, 'roomType');
+    displayAvailbeRoomsByType(filteredRooms)
+    return this.value;
+  } else if (this.value === 'show all') {
+    displayAvailbeRoomsByType(availableRooms)
+    return this.value;
+  }
+}
+
+function displayAvailbeRoomsByType(availableRooms) {
+  let chosenDate = managerDateInput.value.replaceAll('-', '/');
+  listOfAvailabelRooms.innerHTML = '';
+  if(!availableRooms.length) {
+    domDisplay.showErrorMessage(
+      `We apologize for the inconvinience,<br>
+      there are no available rooms matching your search criterias.<br>
+      Please, try another date or room type!`, 'no-rooms-message', 'remove');
+  } else {
+    domDisplay.showErrorMessage(
+      `We apologize for the inconvinience,<br>
+      there are no available rooms matching your search criterias.<br>
+      Please, try another date or room type!`, 'no-rooms-message', 'add');
+  }
+  availableRooms.forEach(card => {
+    let miniRoomCard =
+
+      `<div id="${card.number}" class="book-room-card">
+        <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+        <div class="book-card-details">
+          <p class="book-room-detail">Room #<span id="room-number">${card.number}</p>
+          <p class="book-room-detail">1 night $<span id="room-per-night">${card.costPerNight}</span></p>
+          <button id="btn-${card.number}"class='btn room-btn'>BOOK</button>
+        </div>
+      </div>
+      `
+      listOfAvailabelRooms.innerHTML += miniRoomCard;
+  });
+  addEventListenersToBook()
+}
+
+function addEventListenersToBook() {
+  document.querySelectorAll('.room-btn').forEach(button => {
+    button.addEventListener('click', confirmReservation);
+  });
+}
+
+function bookARoom(roomNumber) {
+  let currentReservaton = {
+    "userID": customerReserveRoomId.value,
+    "date": managerDateInput.value.replaceAll('-', '/'),
+    "roomNumber": 10171992
+  }
+  console.log(currentReservaton)
+  apiRequest.makeAPostRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', currentReservaton);
+}
+
+function confirmReservation() {
+  console.log(customerReserveRoomId.value)
+  if(validateCustomerId(customerReserveRoomId.value) && managerDateInput.value) {
+    domDisplay.showErrorMessage('', 'no-rooms-message', 'add');
+    let customerID = customerReserveRoomId.value;
+    let bookingDetails = this.id.replace('btn-','');
+    var result = confirm(`Would you like to book Room ${bookingDetails} for a Customer#${customerID}`);
+    if (result) {
+        bookARoom(bookingDetails)
+    } else {
+      domDisplay.showErrorMessage(
+        `Reservation was canceled`, 'no-rooms-message', 'remove');
+      }
+    } else {
+  return domDisplay.showErrorMessage(
+    `Please, check User ID and Date to book a room`, 'no-rooms-message', 'remove');
+  }
 }
