@@ -249,8 +249,8 @@ function deleteBooking() {
   event.preventDefault();
   let bookingId = document.getElementById('manager-booking-id').value;
   console.log(bookingId)
-  let foundBooking = bookingRepo.getBookingsId(bookingId)
-  // let foundBooking = {"id": 1604951074374};
+  // let foundBooking = bookingRepo.getBookingsId(bookingId)
+  let foundBooking = {"id": parseInt(bookingId)};
   if(foundBooking) {
     console.log(foundBooking)
     apiRequest.makeADeleteRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', foundBooking)
@@ -273,11 +273,12 @@ function displayCustomerName(userId, customerRepo) {
 }
 
 function getUserInfo() {
-  let userIdInput = managerUserIdInput.value;
+  let userIdInput = parseInt(managerUserIdInput.value);
   if(!userIdInput) {
     return;
   }
   let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
+  console.log(customerInfo)
   displayBookings(customerInfo, roomRepo, userIdInput, customerRepo, listOfBookings);
 }
 
@@ -516,7 +517,7 @@ function bookARoomCustomer(roomNumber) {
   let currentReservaton = {
     "userID": currentUser.id,
     "date": customerDateInput.value.replaceAll('-', '/'),
-    "roomNumber": roomNumber
+    "roomNumber": parseInt(roomNumber)
   }
   // console.log(currentReservaton)
   apiRequest.makeAPostRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', currentReservaton)
