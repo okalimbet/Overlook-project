@@ -82,7 +82,7 @@ describe('Hotel', function() {
   it('should get the total cost of bookings by user id', () => {
     const userRooms = hotel.getUserCardsRoomCards(bookings, roomRepo);
 
-    expect(hotel.getTotalAmountSpentByUser(userRooms).toFixed(2)).to.equal('658.60')
+    expect(hotel.getTotalAmountSpendByUser(userRooms).toFixed(2)).to.equal('658.60')
   });
 
   it('should get full booking and room information for a user', () => {

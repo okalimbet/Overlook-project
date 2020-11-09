@@ -48,7 +48,6 @@ function createHotelData() {
   bookingRepo = new BookingRepo(bookings);
   roomRepo = new RoomRepo(rooms);
   hotelOverlook = new Hotel(bookingRepo, roomRepo, customerRepo);
-  // console.log(bookingRepo.bookingRepo[0])
 }
 
 // let loginPageView = document.getElementById('login-view');
@@ -69,6 +68,16 @@ let username = document.getElementById('username-value');
 let password = document.getElementById('password-value');
 let managerUserIdInput = document.getElementById('manager-user-id');
 let availableRooms = [];
+
+let messageErrors = {
+  errorSearch: `We apologize for the inconvinience,<br>
+                there are no available rooms matching your search criterias.<br>
+                Please, try another date or room type!`,
+  errorCancel: 'Reservation was canceled',
+  errorData: 'Please, check User ID and Date to book a room',
+  errorDataCustomer: 'Please, check your Date to book a room',
+  errrorLogin: 'You have entered an invalid username or password'
+}
 
 loginBtn.addEventListener('click', checkUserLoginInfo);
 logOutBtn.addEventListener('click', logOutUsers);
@@ -142,8 +151,8 @@ function handleManagerLogin() {
   displayTotalAvailableRooms('2020/02/07');
   displayPercentageAvailableRooms('2020/02/07');
   availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, '2020/02/07');
-  displayAvailbeRoomsByType(availableRooms);
-  // displayBookings(hotelOverlook.getUserInfo, roomRepo, date)
+  displayAvailbeRooms(availableRooms);
+  console.log(bookingRepo)
 }
 
 function handleCustomerLogin(providedId) {
@@ -151,8 +160,9 @@ function handleCustomerLogin(providedId) {
   domDisplay.displayCustomerView();
   displayCustomerNameUserPage(providedId);
   let customerInfo = hotelOverlook.getInformationByValue(currentUser.id, bookingRepo.bookingRepo, 'userId');
-  console.log(customerInfo)
   displayCustomerBookings(customerInfo, roomRepo, customerRepo);
+  availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, '2020/02/07');
+  displayAvailbeCustomerRooms(availableRooms);
 }
 
 function checkUserLoginInfo(event) {
@@ -236,10 +246,14 @@ function displayBookings(bookings, roomRepo, userId, customerRepo) {
 }
 
 function deleteBooking() {
+  event.preventDefault();
   let bookingId = document.getElementById('manager-booking-id').value;
+  console.log(bookingId)
   let foundBooking = bookingRepo.getBookingsId(bookingId)
+  // let foundBooking = {"id": 1604951074374};
   if(foundBooking) {
-    apiRequest.deleteBooking(foundBooking)
+    console.log(foundBooking)
+    apiRequest.makeADeleteRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', foundBooking)
     getUserInfo();
   }
 }
@@ -268,7 +282,7 @@ function getUserInfo() {
 }
 
 //------Manager-Add-Reservation-Page------//
-let customerReserveRoomId = document.getElementById('manager-user-id-input');
+let customerReserveUserId = document.getElementById('manager-user-id-input');
 let managerDateInput = document.getElementById('manager-date-choice');
 let managerRoomTypeInput = document.getElementById('manager-room-types');
 let listOfAvailabelRooms = document.getElementById('available-rooms-wrapper');
@@ -280,7 +294,7 @@ function filterAvailableRoomsByDate() {
   if (this.value) {
     let newDate = this.value.replaceAll('-', '/');
     availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
-    displayAvailbeRoomsByType(availableRooms);
+    displayAvailbeRooms(availableRooms);
     let dropDownMenu = document.querySelectorAll('select');
     dropDownMenu.forEach(menu => {
       menu.options[0].selected = 'selected'
@@ -296,36 +310,27 @@ function filterAvailableRoomsType() {
   let filteredRooms = [];
   if (this.value === 'residential suite') {
     filteredRooms = hotelOverlook.getInformationByValue('residential suite', availableRooms, 'roomType');
-    displayAvailbeRoomsByType(filteredRooms)
+    displayAvailbeRooms(filteredRooms)
     return this.value;
   } else if (this.value === 'suite') {
     filteredRooms = hotelOverlook.getInformationByValue('suite', availableRooms, 'roomType');
-    displayAvailbeRoomsByType(filteredRooms)
+    displayAvailbeRooms(filteredRooms)
     return this.value;
   } else if (this.value === 'single room') {
     filteredRooms = hotelOverlook.getInformationByValue('single room', availableRooms, 'roomType');
-    displayAvailbeRoomsByType(filteredRooms)
+    displayAvailbeRooms(filteredRooms)
     return this.value;
   } else if (this.value === 'junior suite') {
     filteredRooms = hotelOverlook.getInformationByValue('junior suite', availableRooms, 'roomType');
-    displayAvailbeRoomsByType(filteredRooms)
+    displayAvailbeRooms(filteredRooms)
     return this.value;
   } else if (this.value === 'show all') {
-    displayAvailbeRoomsByType(availableRooms)
+    displayAvailbeRooms(availableRooms)
     return this.value;
   }
 }
 
-let messageErrors = {
-  errorSearch: `We apologize for the inconvinience,<br>
-                there are no available rooms matching your search criterias.<br>
-                Please, try another date or room type!`,
-  errorCancel: 'Reservation was canceled',
-  errorData: 'Please, check User ID and Date to book a room',
-  errrorLogin: 'You have entered an invalid username or password'
-}
-
-function displayAvailbeRoomsByType(availableRooms) {
+function displayAvailbeRooms(availableRooms) {
   let chosenDate = managerDateInput.value.replaceAll('-', '/');
   listOfAvailabelRooms.innerHTML = '';
   if(!availableRooms.length) {
@@ -341,7 +346,7 @@ function displayAvailbeRoomsByType(availableRooms) {
         <div class="book-card-details">
           <p class="book-room-detail">Room #<span id="room-number">${card.number}</p>
           <p class="book-room-detail">1 night $<span id="room-per-night">${card.costPerNight}</span></p>
-          <button id="btn-${card.number}"class='btn room-btn'>BOOK</button>
+          <button id="btn-${card.number}"class='btn room-btn-manager'>BOOK</button>
         </div>
       </div>
       `
@@ -351,29 +356,32 @@ function displayAvailbeRoomsByType(availableRooms) {
 }
 
 function addEventListenersToBook() {
-  document.querySelectorAll('.room-btn').forEach(button => {
+  document.querySelectorAll('.room-btn-manager').forEach(button => {
     button.addEventListener('click', confirmReservation);
   });
 }
 
 function bookARoom(roomNumber) {
   let currentReservaton = {
-    "userID": customerReserveRoomId.value,
+    "userID": parseInt(customerReserveUserId.value),
     "date": managerDateInput.value.replaceAll('-', '/'),
-    "roomNumber": 10171992
+    "roomNumber": roomNumber
   }
   console.log(currentReservaton)
-  apiRequest.makeAPostRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', currentReservaton);
+  apiRequest.makeAPostRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', currentReservaton)
+  // .then(postedBooking => bookingRepo.push(new Booking(postedBooking.id, postedBooking.userId, postedBooking.bookingDate, postedBooking.roomNumber)));
 }
 
 function confirmReservation() {
-  console.log(customerReserveRoomId.value)
-  if(validateCustomerId(customerReserveRoomId.value) && managerDateInput.value) {
+  console.log('Please work pleeeease')
+  if(validateCustomerId(customerReserveUserId.value) && managerDateInput.value) {
     domDisplay.showErrorMessage('', 'no-rooms-message', 'add');
-    let customerID = customerReserveRoomId.value;
+    let customerID = customerReserveUserId.value;
     let bookingDetails = this.id.replace('btn-','');
+    console.log(bookingDetails)
     var result = confirm(`Would you like to book Room ${bookingDetails} for a Customer#${customerID}`);
     if (result) {
+        console.log(bookingDetails)
         bookARoom(bookingDetails)
     } else {
       domDisplay.showErrorMessage(messageErrors.errorCancel, 'no-rooms-message', 'remove');
@@ -391,7 +399,6 @@ let customerNavBarName = document.getElementById('user-title');
 function displayCustomerBookings(bookings, roomRepo, customerRepo) {
   let cards = hotelOverlook.getUserCardsRoomCards(bookings, roomRepo);
   displayCustomerTotalUserPage(cards);
-  console.log(cards)
   cards.forEach(card => {
     let miniBookingCard =
 
@@ -423,4 +430,111 @@ function displayCustomerTotalUserPage(customerBookings) {
 function displayCustomerNameUserPage(userId) {
   let customerName = customerRepo.customerRepo[parseInt(userId)-1];
   document.getElementById('user-title').innerText = customerName.name;
+}
+
+//------User-Bookings-----//
+
+let customerDateInput = document.getElementById('user-date-input');
+let customerRoomTypeInput = document.getElementById('user-room-data');
+let customerAvailableRooms = document.getElementById('user-available-rooms');
+
+customerRoomTypeInput.addEventListener('change', filterAvailableRoomsTypeCustomer);
+customerDateInput.addEventListener('change', filterAvailableRoomsByDateCustomer);
+
+function displayAvailbeCustomerRooms(availableRooms) {
+  let chosenDate = customerDateInput.value.replaceAll('-', '/');
+  customerAvailableRooms.innerHTML = '';
+  if(!availableRooms.length) {
+    domDisplay.showErrorMessage(messageErrors.errorSearch, 'no-rooms-message-customer', 'remove');
+  } else {
+    domDisplay.showErrorMessage(messageErrors.errorSearch, 'no-rooms-message-customer', 'add');
+  }
+  availableRooms.forEach(card => {
+    let miniRoomCard =
+
+      `<div id="${card.number}" class="book-room-card">
+        <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+        <div class="book-card-details">
+          <p class="book-room-detail">Room #<span id="room-number">${card.number}</p>
+          <p class="book-room-detail">1 night $<span id="room-per-night">${card.costPerNight}</span></p>
+          <button id="btn-${card.number}"class='btn room-btn'>BOOK</button>
+        </div>
+      </div>
+      `
+      customerAvailableRooms.innerHTML += miniRoomCard;
+  });
+  addEventListenersToBookCustomer()
+}
+
+function addEventListenersToBookCustomer() {
+  document.querySelectorAll('.room-btn').forEach(button => {
+    button.addEventListener('click', confirmReservationCustomer);
+  });
+}
+
+function filterAvailableRoomsByDateCustomer() {
+  if (this.value) {
+    let newDate = this.value.replaceAll('-', '/');
+    availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
+    displayAvailbeCustomerRooms(availableRooms);
+    let dropDownMenu = document.querySelectorAll('select');
+    dropDownMenu.forEach(menu => {
+      menu.options[0].selected = 'selected'
+    })
+  } else {
+    domDisplay.showErrorMessage(
+      messageErrors.errorSearch, 'no-rooms-message-customer', 'remove');
+  }
+
+}
+
+function filterAvailableRoomsTypeCustomer() {
+  let filteredRooms = [];
+  if (this.value === 'residential suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('residential suite', availableRooms, 'roomType');
+    displayAvailbeCustomerRooms(filteredRooms)
+    return this.value;
+  } else if (this.value === 'suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('suite', availableRooms, 'roomType');
+    displayAvailbeCustomerRooms(filteredRooms)
+    return this.value;
+  } else if (this.value === 'single room') {
+    filteredRooms = hotelOverlook.getInformationByValue('single room', availableRooms, 'roomType');
+    displayAvailbeCustomerRooms(filteredRooms)
+    return this.value;
+  } else if (this.value === 'junior suite') {
+    filteredRooms = hotelOverlook.getInformationByValue('junior suite', availableRooms, 'roomType');
+    displayAvailbeCustomerRooms(filteredRooms)
+    return this.value;
+  } else if (this.value === 'show all') {
+    displayAvailbeCustomerRooms(availableRooms)
+    return this.value;
+  }
+}
+
+function bookARoomCustomer(roomNumber) {
+  let currentReservaton = {
+    "userID": currentUser.id,
+    "date": customerDateInput.value.replaceAll('-', '/'),
+    "roomNumber": roomNumber
+  }
+  // console.log(currentReservaton)
+  apiRequest.makeAPostRequest('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', currentReservaton)
+  .then(postedBooking => bookingRepo.push(new Booking(postedBooking.id, postedBooking.userId, postedBooking.bookingDate, postedBooking.roomNumber)));
+}
+
+function confirmReservationCustomer() {
+  if(customerDateInput.value) {
+    domDisplay.showErrorMessage('', 'no-rooms-message-customer', 'add');
+    let customerName = currentUser.name;
+    let bookingDetails = this.id.replace('btn-','');
+    var result = confirm(`Would you like to book Room ${bookingDetails}, ${customerName}`);
+    if (result) {
+        bookARoomCustomer(bookingDetails)
+    } else {
+      domDisplay.showErrorMessage(messageErrors.errorCancel, 'no-rooms-message-customer', 'remove');
+      }
+    } else {
+      domDisplay.showErrorMessage(messageErrors.errorDataCustomer, 'no-rooms-message-customer', 'remove');
+  }
 }

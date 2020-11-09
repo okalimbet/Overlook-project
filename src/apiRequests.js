@@ -12,6 +12,7 @@ function getHotelData(url, dataType) {
 }
 
 function makeAPostRequest(url, dataToPost) {
+  console.log(dataToPost)
   fetch(url, {
     method: 'POST',
     headers: {
