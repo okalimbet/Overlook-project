@@ -149,6 +149,10 @@ function handleManagerLogin() {
 function handleCustomerLogin(providedId) {
   currentUser = hotelOverlook.getInformationByValue(parseInt(providedId), customerRepo.customerRepo, 'id')[0];
   domDisplay.displayCustomerView();
+  displayCustomerNameUserPage(providedId);
+  let customerInfo = hotelOverlook.getInformationByValue(currentUser.id, bookingRepo.bookingRepo, 'userId');
+  console.log(customerInfo)
+  displayCustomerBookings(customerInfo, roomRepo, customerRepo);
 }
 
 function checkUserLoginInfo(event) {
@@ -156,7 +160,7 @@ function checkUserLoginInfo(event) {
   let usernameValue = username.value;
   let passwordValue = password.value;
   if(passwordValue !== 'overlook2020') {
-    domDisplay.showErrorMessage('You have entered an invalid username or password', 'login-error', 'remove');
+    domDisplay.showErrorMessage(messageErrors.errrorLogin, 'login-error', 'remove');
     return;
   }
   if(usernameValue === "manager") {
@@ -167,7 +171,8 @@ function checkUserLoginInfo(event) {
   if(customerUsername === 'customer' && validateCustomerId(customerId)) {
     handleCustomerLogin(customerId);
   } else {
-    domDisplay.showErrorMessage('You have entered an invalid username or password', 'login-error', 'remove');
+    domDisplay.showErrorMessage(messageErrors.errrorLogin, 'login-error', 'remove');
+    return;
   }
 }
 
@@ -240,12 +245,12 @@ function deleteBooking() {
 }
 
 function displayCustomerTotalAmount(customerBookings) {
-  let amount = hotelOverlook.getTotalAmountSpentByUser(customerBookings).toFixed(2);
+  let amount = hotelOverlook.getTotalAmountSpendByUser(customerBookings).toFixed(2);
   document.getElementById('user-total').innerText = amount;
 }
 
 function displayCustomerName(userId, customerRepo) {
-  let customerName = customerRepo.customerRepo[userId];
+  let customerName = customerRepo.customerRepo[parseInt(userId)-1];
   if(customerName) {
     document.getElementById('user-name').innerText = customerName.name;
   } else {
@@ -259,7 +264,7 @@ function getUserInfo() {
     return;
   }
   let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
-  displayBookings(customerInfo, roomRepo, userIdInput, customerRepo);
+  displayBookings(customerInfo, roomRepo, userIdInput, customerRepo, listOfBookings);
 }
 
 //------Manager-Add-Reservation-Page------//
@@ -282,9 +287,7 @@ function filterAvailableRoomsByDate() {
     })
   } else {
     domDisplay.showErrorMessage(
-      `We apologize for the inconvinience,<br>
-      there are no available rooms matching your search criterias.<br>
-      Please, try another date or room type!`, 'no-rooms-message', 'remove');
+      messageErrors.errorSearch, 'no-rooms-message', 'remove');
   }
 
 }
@@ -313,19 +316,22 @@ function filterAvailableRoomsType() {
   }
 }
 
+let messageErrors = {
+  errorSearch: `We apologize for the inconvinience,<br>
+                there are no available rooms matching your search criterias.<br>
+                Please, try another date or room type!`,
+  errorCancel: 'Reservation was canceled',
+  errorData: 'Please, check User ID and Date to book a room',
+  errrorLogin: 'You have entered an invalid username or password'
+}
+
 function displayAvailbeRoomsByType(availableRooms) {
   let chosenDate = managerDateInput.value.replaceAll('-', '/');
   listOfAvailabelRooms.innerHTML = '';
   if(!availableRooms.length) {
-    domDisplay.showErrorMessage(
-      `We apologize for the inconvinience,<br>
-      there are no available rooms matching your search criterias.<br>
-      Please, try another date or room type!`, 'no-rooms-message', 'remove');
+    domDisplay.showErrorMessage(messageErrors.errorSearch, 'no-rooms-message', 'remove');
   } else {
-    domDisplay.showErrorMessage(
-      `We apologize for the inconvinience,<br>
-      there are no available rooms matching your search criterias.<br>
-      Please, try another date or room type!`, 'no-rooms-message', 'add');
+    domDisplay.showErrorMessage(messageErrors.errorSearch, 'no-rooms-message', 'add');
   }
   availableRooms.forEach(card => {
     let miniRoomCard =
@@ -370,11 +376,51 @@ function confirmReservation() {
     if (result) {
         bookARoom(bookingDetails)
     } else {
-      domDisplay.showErrorMessage(
-        `Reservation was canceled`, 'no-rooms-message', 'remove');
+      domDisplay.showErrorMessage(messageErrors.errorCancel, 'no-rooms-message', 'remove');
       }
     } else {
-  return domDisplay.showErrorMessage(
-    `Please, check User ID and Date to book a room`, 'no-rooms-message', 'remove');
+  return domDisplay.showErrorMessage(messageErrors.errorData, 'no-rooms-message', 'remove');
   }
+}
+
+//------User-Dashboard-----//
+let customerBookingsContainer = document.getElementById('user-bookings-container');
+let customerNavBarName = document.getElementById('user-title');
+
+
+function displayCustomerBookings(bookings, roomRepo, customerRepo) {
+  let cards = hotelOverlook.getUserCardsRoomCards(bookings, roomRepo);
+  displayCustomerTotalUserPage(cards);
+  console.log(cards)
+  cards.forEach(card => {
+    let miniBookingCard =
+
+      `<div id="booking-${card.bookingId}" class="card-container">
+        <div class="booking-card">
+          <div class="card-left-side">
+            <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+            <div class="card-details">
+              <p class="room-detail">Room Type: ${card.roomType}</p>
+              <p class="room-detail">Date: <span id="date-booking">${card.bookingDate}</span></p>
+              <p class="room-detail">${card.status}</p>
+            </div>
+          </div>
+          <div class="card-right-side">
+            <div class="cr-price">$ <span id="price-booking">${card.price}</span></div>
+          </div>
+         </div>
+      </div>
+      `
+      customerBookingsContainer.innerHTML  += miniBookingCard;
+  });
+}
+
+function displayCustomerTotalUserPage(customerBookings) {
+  let amount = hotelOverlook.getTotalAmountSpendByUser(customerBookings).toFixed(2);
+  document.getElementById('all-bookings-amount').innerText = amount;
+}
+
+function displayCustomerNameUserPage(userId) {
+  let customerName = customerRepo.customerRepo[parseInt(userId)-1];
+  document.getElementById('user-title').innerText = customerName.name;
 }

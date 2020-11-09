@@ -50,7 +50,7 @@ class Hotel {
   // 	return availableRooms;
   // }
 
-  getTotalAmountSpentByUser(customerBookings) {
+  getTotalAmountSpendByUser(customerBookings) {
     return customerBookings.reduce((totalAmount, room) => {
       console.log(room)
       return totalAmount += room.price;
