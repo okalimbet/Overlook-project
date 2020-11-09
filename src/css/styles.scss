@@ -18,6 +18,11 @@ body {
   height: $full-height;
   margin: 0;
   font-family: 'Quicksand';
+  background: url("../images/tokyo-city.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover
 }
 
 #welcome-title {
@@ -44,11 +49,19 @@ ul {
   @include flex-row;
   align-items: center;
   justify-content: space-between;
+  width: auto;
+  margin-left: 1em;
+  margin-right: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .greeting__nav {
   @include flex-row;
   margin: auto 0em;
+  // position: sticky;
+  // top: 0;
 }
 
 .login-page {
@@ -94,7 +107,7 @@ h3 {
 }
 
 #login-form {
-  margin-top: 60px;
+  margin-top: 80px;
 }
 
 .input-border {
@@ -191,7 +204,10 @@ h3 {
 
 .manager-view__information {
   @include flex-column;
-  width: $full-width;
+  width: auto;
+  margin-left: 1em;
+  margin-right: 1em;
+  background-color: $color-white;
 }
 
 .view-headers-dark {
@@ -242,7 +258,7 @@ div.info-cards {
   height: 30px;
   color: $color-dark-primary;
   float: left;
-  margin-top: 1em
+  margin-top: 1em;
   margin-bottom: 1em;
   @include auto-side-margins;
   display: flex;
@@ -295,11 +311,9 @@ div.info-cards {
   height: auto;
   @include flex-column;
   justify-content: space-around;
-  width: $full-width;
+  width: auto;
   flex-wrap: wrap;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  @include auto-side-margins;
+  margin: 1em;
   background: $color-dark-primary;
   color: $color-light-primary;
 }
@@ -308,6 +322,7 @@ div.info-cards {
   @include flex-row;
   margin: 2em 1em 0 1em;
   align-items: center;
+  width: 90%;
 }
 
 .user-info-details {
@@ -348,7 +363,7 @@ div.info-cards {
   margin: 3em 1em;
   height: $secondary-size;
   width: auto;
-  f@include flex-column;
+  @include flex-column;
   overflow: scroll;
 }
 
@@ -406,9 +421,9 @@ div.info-cards {
   height: auto;
   @include flex-column;
   justify-content: space-around;
-  width: $full-width;
+  width: auto;
   flex-wrap: wrap;
-  margin: 1em auto 0em 1em;
+  margin: 1em;
   background: $color-white;
   color: $color-dark-primary;
 }
@@ -480,13 +495,21 @@ div.info-cards {
   height: 2em;
 }
 
+.room-btn-manager {
+  height: 2em;
+}
+
 .book-room-detail {
   margin: 1em auto;
 }
 
 //userview - info-cards
-.user-view {
+#customer-page {
+  background-image: none !important;
+  background: none !important;
+  background-size: 0 !important;
   background-color: $color-dark-primary;
+  height: 100%;
 }
 .user-view__reservations {
   background-color: $color-dark-primary;
@@ -494,9 +517,9 @@ div.info-cards {
   padding: 3em 0 0 0;
   @include flex-column;
   justify-content: space-around;
-  width: $full-width;
+  width: auto;
   flex-wrap: wrap;
-  margin: 0em auto 2em auto;
+  margin: 0em 1em 1em 1em;
 }
 
 .user-header-light {
@@ -508,14 +531,22 @@ div.info-cards {
 //book a rooms
 .user-view__book-room {
   background-color: $color-white;
-  margin: 1em 0em;
+  margin: 1em 1em;
   padding: 1em 1em;
-  width: $full-width;
-  height: 40em;
+  width: auto;
+  height: auto;
 }
 
 .user-book-room-title {
   margin-top: 4em;
+}
+
+#user-date-input {
+  margin: 1em 1em 0em 0em;
+}
+
+#user-room-input {
+  margin: 0em 1em 0em 0em;
 }
 
 #total-spent {
