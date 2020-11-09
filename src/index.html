@@ -53,13 +53,11 @@
   <article id="manager-page" class="manager-view hidden">
     <section id="manager-dashboard"class="manager-view__information">
       <h2 class="view-headers-dark">Information for Today</h2>
-      <!-- <section class="card-box"> -->
       <div class="info-cards">
         <div class="card">
           <div class="card-title">
             <h3 class="card-title-light">TOTAL REVENUE</h3>
           </div>
-          <!-- <div class="card-info"> -->
           <p id="today-date" class="card-info">11/03/2020</p>
           <p id="today-revenue" class="card-info">$ <span id="today-revenue">20300</span></p>
         </div>
@@ -70,7 +68,6 @@
           <div class="card-info">
           <p class="" id="available-rooms">50</p>
         </div>
-          <!-- <p id="rooms-number" class="card-info"><span id="today-revenue">50</span></p> -->
         </div>
         <div class="card">
           <div class="card-title">
@@ -107,49 +104,21 @@
         <div class="left-side-container">
           <label class="manager-form-titles" id="manager-data-input">Choose date: </label>
           <input aria-labelledby="manager-data-input"id="manager-date-choice" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
-
           <label class="manager-form-titles" id="manager-room-input" for="room-type-log">Choose a room type: </label>
           <select aria-labelledby="manager-room-input" class="input-id dark-input" name="room-type-log" id="manager-room-types">
             <option disabled selected value> -- choose a room type -- </option>
+            <option value="show all">show all</option>
             <option value="residential suite">residential suite</option>
             <option value="suite">suite</option>
             <option value="single room">single room</option>
             <option value="junior suite">junior suite</option>
           </select>
         </div>
-        <p id="no-rooms-message" class="">We apologize for the inconvinience,<br>
-          there are no available rooms matching your search criterias.<br>
-          Please, try another date or room type!</p>
+        <p id="no-rooms-message" class="hidden"></p>
       </div>
-      <!-- <div class="available-rooms-container"> -->
-        <div class="available-rooms-container">
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room #<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class="btn room-btn">BOOK</button>
-            <!-- <button class='btn room-btn'>BOOK</button> -->
-          </div>
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room#<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class='btn room-btn'>BOOK</button>
-          </div>
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room#<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class='btn room-btn'>BOOK</button>
-          </div>
+        <div id="available-rooms-wrapper"class="available-rooms-container">
+          <!-- List-Available-Rooms -->
         </div>
-
     </section>
   </article>
 

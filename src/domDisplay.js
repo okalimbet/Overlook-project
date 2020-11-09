@@ -43,9 +43,9 @@ let domDisplay = {
     loginPageView.classList.add('hidden');
   },
 
-  showLoginError(errorMessage) {
-    let errorMessageElement = document.getElementById('login-error');
-    errorMessageElement.classList.remove('hidden');
+  showErrorMessage(errorMessage, elementId, action) {
+    let errorMessageElement = document.getElementById(elementId);
+    errorMessageElement.classList[action]('hidden');
     errorMessageElement.innerText = errorMessage;
   },
 
