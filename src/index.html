@@ -135,54 +135,25 @@
       <h1 class="title-text user-book-room-title">Book a Room</h1>
       <div class="user-info-details">
         <div class="left-side-container">
-          <label class="manager-form-titles" id="manager-data-input">Choose date: </label>
-          <input aria-labelledby="manager-data-input" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
-          <label class="manager-form-titles" id="manager-room-input" for="room-type-log">Choose a room type: </label>
-          <select aria-labelledby="manager-room-input" class="input-id dark-input" name="room-type-log" id="user__activities">
+          <label class="manager-form-titles" id="user-data-input">Choose date: </label>
+          <input aria-labelledby="manager-data-input" id="user-date-input" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
+          <label class="manager-form-titles" id="user-room-input" for="room-type-log">Choose a room type: </label>
+          <select aria-labelledby="user-room-input" class="input-id dark-input" name="room-type-log" id="user-room-data">
             <option disabled selected value> -- choose a room type -- </option>
+            <option value="show all">show all</option>
             <option value="residential suite">residential suite</option>
             <option value="suite">suite</option>
             <option value="single room">single room</option>
             <option value="junior suite">junior suite</option>
           </select>
-          <!-- <label class="manager-form-titles" id="manager-room-input">Choose a room type: </label>
-          <input aria-labelledby="manager-room-input" type="text" class="input-id dark-input" name="manager-room-input"> -->
         </div>
-        <p id="no-rooms-message" class="">We apologize for the inconvinience,<br>
-          there are no available rooms matching your search criterias.<br>
-          Please, try another date or room type!</p>
+        <p id="no-rooms-message-customer" class=""></p>
       </div>
       <!-- <div class="available-rooms-container"> -->
-        <div class="available-rooms-container">
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room #<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class="btn room-btn">BOOK</button>
-            <!-- <button class='btn room-btn'>BOOK</button> -->
-          </div>
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room#<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class='btn room-btn'>BOOK</button>
-          </div>
-          <div id="" class="book-room-card">
-            <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
-            <div class="book-card-details">
-              <p class="book-room-detail">Room#<span id="room-number">3</p>
-              <p class="book-room-detail">1 night $<span id="room-per-night">500.00</span></p>
-            </div>
-            <button class='btn room-btn'>BOOK</button>
-          </div>
+        <div id="user-available-rooms" class="available-rooms-container">
+          <!-- List-of-Available-Bookings-->
         </div>
     </section>
-
   </article>
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
