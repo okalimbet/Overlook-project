@@ -62,12 +62,16 @@ function createHotelData() {
 
 let loginBtn = document.getElementById('login-button');
 let logOutBtn = document.getElementById('log-out');
+let deleteBtn = document.getElementById('delete-button');
 
 let username = document.getElementById('username-value');
 let password = document.getElementById('password-value');
+let managerUserIdInput = document.getElementById('manager-user-id');
 
 loginBtn.addEventListener('click', checkUserLoginInfo);
-logOutBtn.addEventListener('click',logOutUsers);
+logOutBtn.addEventListener('click', logOutUsers);
+deleteBtn.addEventListener('click', deleteBooking);
+managerUserIdInput.addEventListener('keyup', getUserInfo);
 
 function logOutUsers() {
   let allTextInputs = document.querySelectorAll('input');
@@ -139,6 +143,7 @@ function handleManagerLogin() {
   displayTotayDate();
   displayTotalAvailableRooms('2020/02/07');
   displayPercentageAvailableRooms('2020/02/07');
+  // displayBookings(hotelOverlook.getUserInfo, roomRepo, date)
 }
 
 function handleCustomerLogin(providedId) {
@@ -193,9 +198,65 @@ function displayPercentageAvailableRooms(date) {
         <text x="18" y="20.35" id="percentage">${availabilityPercentage}%</text>
       `
 }
+let listOfBookings = document.getElementById('manager-bookings-container')
+function displayBookings(bookings, roomRepo, userId, customerRepo) {
+  listOfBookings.innerHTML = '';
+  let cards = hotelOverlook.getUserCardsRoomCards(bookings, roomRepo);
+  displayCustomerTotalAmount(cards);
+  displayCustomerName(userId, customerRepo)
+  cards.forEach(card => {
+    let miniBookingCard =
 
-function displayBookings(bookings) {
-
+      `<div id="booking-${card.bookingId}" class="card-container">
+        <div class="booking-card">
+          <div class="card-left-side">
+            <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+            <div class="card-details">
+              <p class="room-detail">Reservation ID: "${card.bookingId}"</p>
+              <p class="room-detail">Room Type: ${card.roomType}</p>
+              <p class="room-detail">Date: <span id="date-booking">${card.bookingDate}</span></p>
+              <p class="room-detail">${card.status}</p>
+            </div>
+          </div>
+          <div class="card-right-side">
+            <div class="cr-price">$ <span id="price-booking">${card.price}</span></div>
+          </div>
+         </div>
+      </div>
+      `
+      listOfBookings.innerHTML  += miniBookingCard;
+  });
 }
 
-//
+function deleteBooking() {
+  let bookingId = document.getElementById('manager-booking-id').value;
+  let foundBooking = bookingRepo.getBookingsId(bookingId)
+  if(foundBooking) {
+    apiRequest.deleteBooking(foundBooking)
+    getUserInfo();
+  }
+}
+
+function displayCustomerTotalAmount(customerBookings) {
+  let amount = hotelOverlook.getTotalAmountSpentByUser(customerBookings).toFixed(2);
+  document.getElementById('user-total').innerText = amount;
+}
+
+function displayCustomerName(userId, customerRepo) {
+  let customerName = customerRepo.customerRepo[userId];
+  if(customerName) {
+    document.getElementById('user-name').innerText = customerName.name;
+  } else {
+    document.getElementById('user-name').innerText = 'Enter Valid User ID'
+  }
+}
+
+function getUserInfo() {
+  let userIdInput = managerUserIdInput.value;
+  console.log(userIdInput)
+  if(!userIdInput) {
+    return;
+  }
+  let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
+  displayBookings(customerInfo, roomRepo, userIdInput, customerRepo);
+}

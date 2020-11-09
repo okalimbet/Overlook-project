@@ -25,7 +25,7 @@ function makeAPostRequest(url, dataToPost) {
 
 function makeADeleteRequest(url, dataToDelete) {
   fetch(url, {
-    method: 'POST',
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },

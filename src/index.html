@@ -85,94 +85,18 @@
     <section id="manager-user-information" class="manager-view__user-info">
       <form class="user-info-form">
         <label class="manager-form-titles" id="findUserId" for="userIdInput" >User ID</label>
-        <input aria-labelledby="findUserId" id="manager-user-id" min="0" type="text" class="input-id" name="userIdInput" required>
+        <input aria-labelledby="findUserId" id="manager-user-id" type="search" class="input-id" name="userIdInput">
         <label class="manager-form-titles" id="findBookingId" for="bookingIdInput">Booking ID</label>
-        <input aria-labelledby="findBookingId" id="manager-booking-id" min="0" type="text" class="input-id" name="userBookingInput" required>
+        <input aria-labelledby="findBookingId" id="manager-booking-id" type="text" class="input-id" name="userBookingInput">
         <button id="delete-button" class="btn">DELETE</button>
       </form>
       <div class="user-info-details">
-        <p class="manager-form-titles">Name:  <span id="user-name">Same</span></p>
-        <p class="manager-form-titles">Total amount:  $<span id="user-total">6,0002.30</span></p>
+        <p class="manager-form-titles">Name:  <span id="user-name"></span></p>
+        <p class="manager-form-titles">Total amount:  $<span id="user-total">0.00</span></p>
       </div>
-
-      <div class="bookings-container">
-        <div class="card-container">
-          <div class="booking-card">
-            <div class="card-left-side">
-              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
-              <div class="card-details">
-                <p class="room-detail">RoomType</p>
-                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
-                <p class="room-detail">Upcoming</p>
-              </div>
-            </div>
-            <div class="card-right-side">
-              <div class="cr-price">$ <span id="price-booking">2004.50</span></div>
-            </div>
-           </div>
-        </div>
-        <div class="card-container">
-          <div class="booking-card">
-            <div class="card-left-side">
-              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
-              <div class="card-details">
-                <p class="room-detail">RoomType</p>
-                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
-                <p class="room-detail">Upcoming</p>
-              </div>
-            </div>
-            <div class="card-right-side">
-              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
-            </div>
-           </div>
-        </div>
-        <div class="card-container">
-          <div class="booking-card">
-            <div class="card-left-side">
-              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
-              <div class="card-details">
-                <p class="room-detail">RoomType</p>
-                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
-                <p class="room-detail">Upcoming</p>
-              </div>
-            </div>
-            <div class="card-right-side">
-              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
-            </div>
-           </div>
-        </div>
-        <div class="card-container">
-          <div class="booking-card">
-            <div class="card-left-side">
-              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
-              <div class="card-details">
-                <p class="room-detail">RoomType</p>
-                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
-                <p class="room-detail">Upcoming</p>
-              </div>
-            </div>
-            <div class="card-right-side">
-              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
-            </div>
-           </div>
-        </div>
-        <div class="card-container">
-          <div class="booking-card">
-            <div class="card-left-side">
-              <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
-              <div class="card-details">
-                <p class="room-detail">RoomType</p>
-                <p class="room-detail">Date: <span id="date-booking">11/03/2020</span></p>
-                <p class="room-detail">Upcoming</p>
-              </div>
-            </div>
-            <div class="card-right-side">
-              <p class="room-detail">$ <span id="price-booking">2004.50</span></p>
-            </div>
-           </div>
-        </div>
+      <div id="manager-bookings-container" class="bookings-container">
+        <p id="bookings-error"></p>
       </div>
-
     </section>
     <section id="manager-book-room" class="manager-view__book-room">
       <div class="user-info-details">
