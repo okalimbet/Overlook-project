@@ -42,6 +42,10 @@ describe('BookingRepo', function() {
     expect(result).to.equal(true);
   });
 
+  it('should get an id of the booking', () => {
+    expect(bookingRepo.getBookingsId("5fwrgu4i7k55hl7q8")).to.deep.equal({id: "5fwrgu4i7k55hl7q8"});
+  });
+
   it('should filter through bookings by date and userID', () => {
     expect(bookingRepo.getBookingsByUserIdAndDate(13, "2020/02/10")).to.deep.equal([booking2]);
   });
