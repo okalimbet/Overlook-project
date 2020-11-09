@@ -8,8 +8,8 @@ class Hotel {
   getInformationByValue(value, data, property) {
     return data.filter(dataPiece => {
       return property === null ? value === dataPiece : value === dataPiece[property];
-  })
-}
+    })
+  }
 
   determineUpcomingBookings(booking) {
     let todayDate = new Date().getTime();
@@ -40,6 +40,38 @@ class Hotel {
       .filter(room => !bookingByDate
       .some(booking => room.number === booking.roomNumber));
   	return availableRooms;
+  }
+
+  // getUsersRooms(userId, bookingRepo, roomRepo) {
+  //   let bookingByUserId = this.getInformationByValue(userId, bookingRepo, 'userID');
+  //   let availableRooms = roomRepo
+  //     .filter(room => !bookingByUserId
+  //     .some(booking => room.number === booking.roomNumber));
+  // 	return availableRooms;
+  // }
+
+  getTotalAmountSpentByUser(customerBookings) {
+    return customerBookings.reduce((totalAmount, room) => {
+      console.log(room)
+      return totalAmount += room.price;
+    }, 0);
+  }
+
+  getUserCardsRoomCards(bookings, roomRepo) {
+    return bookings.reduce((cards, booking) => {
+      let bookingStatus = this.determineUpcomingBookings(booking);
+      let chosenRoom = roomRepo.roomRepo.find(room => {
+          return room.number === booking.roomNumber;
+      });
+      cards.push({
+        bookingId: booking.id,
+        roomType: chosenRoom.roomType,
+        bookingDate: booking.bookingDate,
+        price: chosenRoom.costPerNight,
+        status: bookingStatus
+      });
+      return cards;
+    }, [])
   }
 }
 

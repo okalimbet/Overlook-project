@@ -78,4 +78,27 @@ describe('Hotel', function() {
   it('should get available Rooms on the certain date', () => {
     expect(hotel.filterBookingByDate(bookings)).to.deep.equal([booking2, booking1])
   });
+
+  it('should get the total cost of bookings by user id', () => {
+    const userRooms = hotel.getUserCardsRoomCards(bookings, roomRepo);
+
+    expect(hotel.getTotalAmountSpentByUser(userRooms).toFixed(2)).to.equal('658.60')
+  });
+
+  it('should get full booking and room information for a user', () => {
+    expect(hotel.getUserCardsRoomCards(bookings, roomRepo)).to.deep.equal([{
+      bookingId: "5fwrgu4i7k55hl7q8",
+      roomType: "single room",
+      bookingDate: "2020/01/24",
+      price: 300.2,
+      status: 'Completed'
+    },
+      {
+      bookingId: "5fwrgu4i7k55hl6t5",
+      roomType: "residential suite",
+      bookingDate: "2020/02/10",
+      price: 358.4,
+      status: 'Completed'
+    }])
+  });
 });
