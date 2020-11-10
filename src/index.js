@@ -248,15 +248,6 @@ function deleteBooking() {
   }
 }
 
-// function validateBookingId(bookingId) {
-//   if(bookingId.length > 0 && typeof bookingId === 'number') {
-//     let reservationId = parseInt(bookingId);
-//     return (bookingRepo.bookingRepo.find(booking => booking.id === reservationId)) ? true : false;
-//   } else {
-//     return false;
-//   }
-// }
-
 function displayCustomerTotalAmount(customerBookings) {
   let amount = hotelOverlook.getTotalAmountSpendByUser(customerBookings).toFixed(2);
   document.getElementById('user-total').innerText = amount;
@@ -272,13 +263,18 @@ function displayCustomerName(userId, customerRepo) {
 }
 
 function getUserInfo() {
-  let userIdInput = parseInt(managerUserIdInput.value);
-  if (!userIdInput) {
-    document.getElementById('user-name').innerText = 'Enter Valid User ID';
-    return;
+  if (Object.keys(currentUser).length > 0) {
+    let customerInfo = hotelOverlook.getInformationByValue(currentUser.id, bookingRepo.bookingRepo, 'userId');
+    displayCustomerBookings(customerInfo, roomRepo);
+  } else if (Object.keys(currentUser).length === 0) {
+    let userIdInput = parseInt(managerUserIdInput.value);
+    if (!userIdInput) {
+      document.getElementById('user-name').innerText = 'Enter Valid User ID';
+      return;
+    }
+    let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
+    displayBookings(customerInfo, roomRepo, userIdInput, customerRepo, listOfBookings);
   }
-  let customerInfo = hotelOverlook.getInformationByValue(parseInt(userIdInput), bookingRepo.bookingRepo, 'userId');
-  displayBookings(customerInfo, roomRepo, userIdInput, customerRepo, listOfBookings);
 }
 
 function filterAvailableRoomsByDate() {
@@ -317,7 +313,6 @@ function validateTheUserInputDate(newDate, container, method, errorContainer) {
 }
 
 function displayAvailbeRooms(availableRooms) {
-  // let chosenDate = managerDateInput.value.replaceAll('-', '/');
   listOfAvailabelRooms.innerHTML = '';
   if (!availableRooms.length) {
     domDisplay.showErrorMessage(infoMessages.errorSearch, 'no-rooms-message', 'remove');
@@ -348,7 +343,6 @@ function addEventListenersToBook(buttonElement, method) {
 }
 
 function displayAvailbeCustomerRooms(availableRooms) {
-  // let chosenDate = customerDateInput.value.replaceAll('-', '/');
   customerAvailableRooms.innerHTML = '';
   if (!availableRooms.length) {
     domDisplay.showErrorMessage(infoMessages.errorSearch, 'no-rooms-message-customer', 'remove');
