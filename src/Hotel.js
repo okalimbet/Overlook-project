@@ -14,7 +14,7 @@ class Hotel {
   determineUpcomingBookings(booking) {
     let todayDate = new Date().getTime();
     let bookingDate = new Date(booking.bookingDate).getTime();
-    if(bookingDate > todayDate){
+    if (bookingDate > todayDate) {
       return 'Upcoming';
     }
     return 'Completed';
@@ -38,8 +38,8 @@ class Hotel {
     let bookingByDate = this.getInformationByValue(date, bookingRepo, 'bookingDate');
     let availableRooms = roomRepo
       .filter(room => !bookingByDate
-      .some(booking => room.number === booking.roomNumber));
-  	return availableRooms;
+        .some(booking => room.number === booking.roomNumber));
+    return availableRooms;
   }
 
   getTotalAmountSpendByUser(customerBookings) {
@@ -52,7 +52,7 @@ class Hotel {
     return bookings.reduce((cards, booking) => {
       let bookingStatus = this.determineUpcomingBookings(booking);
       let chosenRoom = roomRepo.roomRepo.find(room => {
-          return room.number === booking.roomNumber;
+        return room.number === booking.roomNumber;
       });
       cards.push({
         bookingId: booking.id,

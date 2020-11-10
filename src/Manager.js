@@ -9,16 +9,16 @@ class Manager extends Hotel {
   }
 
   getAvailabilityOfRoomsPercentage(bookingRepo, roomRepo, date) {
-  	const bookedRooms = this.getAvailableRooms(bookingRepo, roomRepo, date);
-  	const percentage = Math.ceil(bookedRooms.length / roomRepo.length * 100);
-  	return percentage;
+    const bookedRooms = this.getAvailableRooms(bookingRepo, roomRepo, date);
+    const percentage = Math.ceil(bookedRooms.length / roomRepo.length * 100);
+    return percentage;
   }
 
   getRevenueOnDate(bookingRepo, roomRepo, date) {
     let bookingByDate = this.getInformationByValue(date, bookingRepo, 'bookingDate');
     return bookingByDate.reduce((revenue,  bookedRoom) => {
       roomRepo.forEach(room => {
-        if(room.number === bookedRoom.roomNumber) {
+        if (room.number === bookedRoom.roomNumber) {
           revenue += parseFloat(room.costPerNight);
         }
       })

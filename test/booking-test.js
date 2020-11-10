@@ -10,7 +10,6 @@ describe('Booking', function() {
   });
 
   it('should be a function', () => {
-    const bookingOne = new Booking();
     expect(Booking).to.be.a('function');
   });
 
@@ -52,7 +51,7 @@ describe('Booking', function() {
       {"item": "Hummus and vegetable platter", "price": 8.1}
     ]
 
-      booking.roomServiceCharges = roomCharges;
+    booking.roomServiceCharges = roomCharges;
 
     expect(booking.getTotalServiceCharges()).to.equal('23.60');
   });

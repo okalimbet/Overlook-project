@@ -1,5 +1,5 @@
 class Room {
-  constructor(number = 0, roomType = '', bidet = false, bedSize = 'unknown', numBeds = 1, costPerNight = 1){
+  constructor(number = 0, roomType = '', bidet = false, bedSize = 'unknown', numBeds = 1, costPerNight = 1) {
     this.number = number,
     this.roomType = roomType,
     this.bidet = bidet,

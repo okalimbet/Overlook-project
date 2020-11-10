@@ -8,9 +8,9 @@ const apiRequest = require('../src/apiRequests');
 
 describe('apiRequest', function() {
   let url,
-      dataType,
-      dataToPost,
-      dataToDelete;
+    dataType,
+    dataToPost,
+    dataToDelete;
 
   before(function() {
     chai.spy.on(apiRequest, ['getHotelData', 'makeAPostRequest', 'makeADeleteRequest'], () => {});
