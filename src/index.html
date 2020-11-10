@@ -14,19 +14,19 @@
       <div id="manager-nav" class="greeting__nav hidden">
         <h1 id="welcome-title" class="navigation__item__title-light">WELCOME</h1>
         <ul class="navigation__list">
-          <li class="navigation__item"><a href="#manager-dashboard" class="navigation__item__title-light">Dashboard</a></li>
-          <li class="navigation__item"><a href="#manager-user-information" class="navigation__item__title-light">Users</a></li>
-          <li class="navigation__item"><a href="#manager-book-room" class="navigation__item__title-light">Book</a></li>
+          <li class="navigation__item"><a href="#manager-dashboard" class="navigation__item__title-light" tabindex="0">Dashboard</a></li>
+          <li class="navigation__item"><a href="#manager-user-information" class="navigation__item__title-light" tabindex="0">Users</a></li>
+          <li class="navigation__item"><a href="#manager-book-room" class="navigation__item__title-light" tabindex="0">Book</a></li>
         </ul>
       </div>
       <div id="user-nav" class="greeting__nav hidden">
         <h1 id="user-title" class="navigation__item__title-light">Mike Wazowski</h1>
         <ul class="navigation__list">
-          <li class="navigation__item"><a href="#user-reservations" class="navigation__item__title-light">Dashboard</a></li>
-          <li class="navigation__item"><a href="#user-book-room" class="navigation__item__title-light">Book</a></li>
+          <li class="navigation__item"><a href="#user-reservations" class="navigation__item__title-light" tabindex="0">Dashboard</a></li>
+          <li class="navigation__item"><a href="#user-book-room" class="navigation__item__title-light" tabindex="0">Book</a></li>
         </ul>
       </div>
-      <button class="btn light-btn" id="log-out">Log Out</button>
+      <button class="btn light-btn" id="log-out" tabindex="0">Log Out</button>
     </nav>
   <article id="login-view" class="login-page">
     <div class="login-page__box">
@@ -39,7 +39,7 @@
           <div class="border"></div>
         </div>
         <div class="input-border">
-          <input aria-labelledby="user-password" autocomplete="current-password" id="password-value" type="password" class="text" name="password-input" required>
+          <input aria-labelledby="password" autocomplete="current-password" id="password-value" type="password" class="text" name="password-input" required>
           <label class="login-label"id="password" for="password-input">Password</label>
           <div class="border"></div>
         </div>
@@ -51,14 +51,14 @@
     <section id="manager-dashboard"class="manager-view__information">
       <h2 class="view-headers-dark">Information for Today</h2>
       <div class="info-cards">
-        <div class="card">
+        <div class="card" tabindex="0">
           <div class="card__title">
             <h3 class="card__title__light">TOTAL REVENUE</h3>
           </div>
           <p id="today-date" class="card__info">11/03/2020</p>
           <p id="today-revenue" class="card__info">$ <span id="today-revenue">20300</span></p>
         </div>
-        <div class="card">
+        <div class="card" tabindex="0">
           <div class="card__title">
             <h3 class="card__title__light">AVAILABLE ROOMS</h3>
           </div>
@@ -66,7 +66,7 @@
             <p class="" id="available-rooms">50</p>
           </div>
         </div>
-        <div class="card">
+        <div class="card" tabindex="0">
           <div class="card__title">
             <h3 class="card__title__light">Occupied vs Available Rooms</h3>
           </div>
@@ -76,16 +76,16 @@
     </section>
     <section id="manager-user-information" class="manager-view__user-info">
       <form class="user-info-form">
-        <label class="manager-form-titles" id="findUserId" for="userIdInput" >User ID</label>
-        <input aria-labelledby="findUserId" id="manager-user-id" type="search" class="input-id" name="userIdInput">
+        <label class="manager-form-titles " id="findUserId" for="userIdInput" >User ID</label>
+        <input aria-labelledby="findUserId" id="manager-user-id" type="search" class="input-id" name="userIdInput" tabindex="0">
         <label class="manager-form-titles" id="findBookingId" for="bookingIdInput">Booking ID</label>
-        <input aria-labelledby="findBookingId" id="manager-booking-id" type="text" class="input-id" name="userBookingInput">
-        <button id="delete-button" class="btn">DELETE</button>
-        <p id="no-rooms-message-1" class="hidden"></p>
+        <input aria-labelledby="findBookingId" id="manager-booking-id" type="text" class="input-id" name="userBookingInput" tabindex="0">
+        <button id="delete-button" class="btn light-btn" tabindex="0">Delete</button>
       </form>
       <div class="user-info-details">
         <p class="manager-form-titles">Name:  <span id="user-name"></span></p>
         <p class="manager-form-titles">Total amount:  $<span id="user-total">0.00</span></p>
+        <p id="no-rooms-message-1" class="hidden"></p>
       </div>
       <div id="manager-bookings-container" class="bookings-container">
         <p id="bookings-error"></p>
@@ -99,7 +99,7 @@
       <div class="user-info-details">
         <div class="left-side-container">
           <label class="manager-form-titles" id="manager-data-input">Choose date: </label>
-          <input aria-labelledby="manager-data-input"id="manager-date-choice" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
+          <input aria-labelledby="manager-data-input" id="manager-date-choice" type="date" min='' max='2020-12-31' class="input-id dark-input" name="manager-data-input" required>
           <label class="manager-form-titles" id="manager-room-input" for="room-type-log">Choose a room type: </label>
           <select aria-labelledby="manager-room-input" class="input-id dark-input" name="room-type-log" id="manager-room-types">
             <option disabled selected value> -- choose a room type -- </option>
