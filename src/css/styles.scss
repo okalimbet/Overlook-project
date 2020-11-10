@@ -138,10 +138,7 @@ h3 {
   width: 95%;
   height: $full-height;
   padding: 0 10px;
-  border: none;
-  border-bottom: 2px solid $color-secondary-middle-tone;
-  background: none;
-  color: $color-light-primary;
+  @include input-border;
 }
 
 .border {
@@ -198,7 +195,7 @@ h3 {
 .light-btn {
   width: 6em;
   height: $box-height;
-  margin: auto 1em;
+  margin: $margin-auto-sides;
 }
 
 .navigation__item__title-light {
@@ -229,11 +226,11 @@ div.info-cards {
   @include flex-row;
   @include container-wrap;
   width: $full-width;
-  margin: 1em auto;
+  margin: $margin-auto-top-bot;
 }
 
 .card {
-  margin: 1em;
+  margin: $margin-primary;
   border: 2px solid $color-dark-primary;
   width: $primary-size;
   height: $secondary-size;
@@ -315,7 +312,7 @@ div.info-cards {
   @include flex-column;
   @include container-wrap;
   width: $auto-width;
-  margin: 1em;
+  margin: $margin-primary;
   background: $color-dark-primary;
   color: $color-light-primary;
 }
@@ -351,11 +348,7 @@ div.info-cards {
 .input-id {
   width: 9em;
   height: 1.5em;
-  padding: 0 10px;
-  border: none;
-  border-bottom: 2px solid $color-secondary-middle-tone;
-  background: none;
-  color: $color-light-primary;
+  @include input-border;
 }
 
 .input-id:focus {
@@ -396,7 +389,7 @@ div.info-cards {
 
 .card-container {
   @include flex-row;
-  padding: 1em;
+  padding: $padding-primary;
   background-color: $color-white;
   color: $color-dark-primary;
   font-size: 0.8em;
@@ -406,11 +399,11 @@ div.info-cards {
 }
 
 .card-container:hover {
-  box-shadow: 2px 2px 8px $color-light-primary;
+  @include box-shadow-light;
 }
 
 .card-details {
-  margin: auto 1em;
+  margin: $margin-auto-sides;
 }
 
 .room-detail {
@@ -425,7 +418,7 @@ div.info-cards {
   @include respond(phone) {
     width: 8em;
     height: 2.2em;
-    margin: auto 1em;
+    margin: $margin-auto-sides;
     font-size: 0.9em;
   }
 }
@@ -440,7 +433,7 @@ div.info-cards {
   @include flex-column;
   @include container-wrap;
   width: $auto-width;
-  margin: 1em;
+  margin: $margin-primary;
   background: $color-white;
   color: $color-dark-primary;
 }
@@ -464,7 +457,7 @@ div.info-cards {
 }
 
 #no-rooms-message-customer {
-  margin: 1em;
+  margin: $margin-primary;
 }
 
 #manager-data-input {
@@ -489,18 +482,18 @@ div.info-cards {
 }
 
 .book-room-card {
-  margin: 1em;
+  margin: $margin-primary;
   width: 14em;
   height: $primary-size;
   @include flex-column;
   color: $color-light-primary;
   background-color: $color-dark-primary;
-  padding: 1em;
+  padding: $padding-primary;
   justify-content: space-between;
 }
 
 .book-room-card:hover {
-  box-shadow: 2px 2px 8px $color-dark-primary;
+  @include box-shadow-dark;
 }
 
 .book-room-img {
@@ -512,7 +505,7 @@ div.info-cards {
 
 .book-card-details {
   @include flex-column;
-  align-items:  center;
+  align-items: center;
 }
 
 .room-btn {
@@ -524,7 +517,7 @@ div.info-cards {
 }
 
 .book-room-detail {
-  margin: 1em auto;
+  margin: $margin-auto-top-bot;
 }
 
 //------Userview-Info-Cards-------//
@@ -555,8 +548,8 @@ div.info-cards {
 //------Userview-Book-Rooms-------//
 .user-view__book-room {
   background-color: $color-white;
-  margin: 1em;
-  padding: 1em;
+  margin: $margin-primary;
+  padding: $padding-primary;
   width: $auto-width;
   height: auto;
 }

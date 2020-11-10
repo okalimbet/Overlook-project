@@ -24,6 +24,22 @@
   flex-wrap: wrap;
 }
 
+@mixin input-border {
+  padding: 0 10px;
+  border: none;
+  border-bottom: 2px solid $color-secondary-middle-tone;
+  background: none;
+  color: $color-light-primary;
+}
+
+@mixin box-shadow-light {
+  box-shadow: 2px 2px 8px $color-light-primary;
+}
+
+@mixin box-shadow-dark {
+  box-shadow: 2px 2px 8px $color-dark-primary;
+}
+
 //------MEDIA QUERY MANAGER------//
 @mixin respond($breakpoint) {
     @if $breakpoint == phone {
