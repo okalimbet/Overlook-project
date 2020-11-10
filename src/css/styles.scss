@@ -94,6 +94,7 @@ ul {
     box-shadow: 0 0 8px black;
     background: $color-dark-primary;;
     opacity: 1;
+    text-align: center;
   }
 }
 
@@ -125,6 +126,9 @@ h3 {
 
 #login-error {
   animation: fadeIn 2s;
+  font-size: 1em;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .input-border {
@@ -568,6 +572,7 @@ div.info-cards {
   position: absolute;
   top: 6em;
   left: 1em;
+  margin-left: 0.3em;
 }
 
 @keyframes fadeIn {
