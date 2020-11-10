@@ -42,17 +42,8 @@ class Hotel {
   	return availableRooms;
   }
 
-  // getUsersRooms(userId, bookingRepo, roomRepo) {
-  //   let bookingByUserId = this.getInformationByValue(userId, bookingRepo, 'userID');
-  //   let availableRooms = roomRepo
-  //     .filter(room => !bookingByUserId
-  //     .some(booking => room.number === booking.roomNumber));
-  // 	return availableRooms;
-  // }
-
   getTotalAmountSpendByUser(customerBookings) {
     return customerBookings.reduce((totalAmount, room) => {
-      console.log(room)
       return totalAmount += room.price;
     }, 0);
   }
