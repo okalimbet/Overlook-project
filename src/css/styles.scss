@@ -10,19 +10,19 @@ outline: none;
 html {
   margin: 0;
   height: $full-height;
-}
 
-body {
-  position: absolute;
-  width: $full-width;
-  height: $full-height;
-  margin: 0;
-  font-family: 'Quicksand';
-  background: url("../images/tokyo-city.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover
+  body {
+    position: absolute;
+    width: $full-width;
+    height: $full-height;
+    margin: inherit;
+    font-family: 'Quicksand';
+    background: url("../images/tokyo-city.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover
+  }
 }
 
 #welcome-title {
@@ -49,7 +49,7 @@ ul {
   @include flex-row;
   align-items: center;
   justify-content: space-between;
-  width: auto;
+  width: $auto-width;
   margin-left: 1em;
   margin-right: 1em;
   position: sticky;
@@ -60,8 +60,6 @@ ul {
 .greeting__nav {
   @include flex-row;
   margin: auto 0em;
-  // position: sticky;
-  // top: 0;
 }
 
 .login-page {
@@ -70,15 +68,15 @@ ul {
   left: 50%;
   transform: translate(-50%, -50%);
   background: $color-dark-primary;
-}
 
-.login-page__box {
-  width: 380px;
-  height: 350px;
-  padding: 25px;
-  box-shadow: 0 0 8px black;
-  background: $color-dark-primary;;
-  opacity: 1;
+  &__box {
+    width: 380px;
+    height: 350px;
+    padding: 25px;
+    box-shadow: 0 0 8px black;
+    background: $color-dark-primary;;
+    opacity: 1;
+  }
 }
 
 h2 {
@@ -89,7 +87,6 @@ h2 {
 }
 
 h2:before {
-  // content: "";
   position: absolute;
   width: 80%;
   height: 2px;
@@ -184,7 +181,7 @@ h3 {
 
 .light-btn {
   width: 6em;
-  height: 2em;
+  height: $box-height;
   margin: auto 1em;
 }
 
@@ -200,11 +197,10 @@ h3 {
 .navigation__item__title-light:hover {
   border-bottom: 1px solid $color-light-primary;
 }
-////////////
 
 .manager-view__information {
   @include flex-column;
-  width: auto;
+  width: $auto-width;
   margin-left: 1em;
   margin-right: 1em;
   background-color: $color-white;
@@ -212,7 +208,7 @@ h3 {
 
 .view-headers-dark {
   color: $color-dark-blue;
-  height: 2em;
+  height: $box-height;
   margin: 1.5em 0 1em 0;
 }
 
@@ -231,40 +227,34 @@ div.info-cards {
   width: $primary-size;
   height: $secondary-size;
   @include flex-column;
+
+  &__title {
+    height: $box-height;
+    background: $color-dark-primary;
+    width: $primary-size;
+    justify-content: center;
+    @include flex-column;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__info {
+    font-size: 1.5em;
+    height: 30px;
+    color: $color-dark-primary;
+    float: left;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    @include auto-side-margins;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 #today-date {
   margin-top: 6em;
   margin-bottom: 2em;
   @include auto-side-margins;
-}
-
-.card-title-light {
-  // vertical-align: middle;
-}
-.card-title {
-  height: 2em;
-  background: $color-dark-primary;
-  width: $primary-size;
-  justify-content: center;
-  @include flex-column;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.card-info {
-  font-size: 1.5em;
-  // text-align: center;
-  height: 30px;
-  color: $color-dark-primary;
-  float: left;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  @include auto-side-margins;
-  display: flex;
-  justify-content: center;
-  // align-content: center;
-  // text-align: center;
 }
 
 #available-rooms{
@@ -275,22 +265,21 @@ div.info-cards {
   text-align: center;
 }
 
-//diagram
-
+//-------Diagram------//
 .circular-chart {
   color: $color-dark-primary;
   display: block;
   margin: auto;
   max-width: 80%;
   max-height: 250px;
-}
 
-.circle {
-  stroke: #4CC790;
-  fill: none;
-  stroke-width: 2.8;
-  stroke-linecap: round;
-  animation: progress 1s ease-out forwards;
+  &__circle {
+    stroke: #4CC790;
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+  }
 }
 
 @keyframes progress {
@@ -305,13 +294,12 @@ div.info-cards {
   text-anchor: middle;
 }
 
-
-//manager-user card-details
+//------Manager-User--Details------//
 .manager-view__user-info {
   height: auto;
   @include flex-column;
   justify-content: space-around;
-  width: auto;
+  width: $auto-width;
   flex-wrap: wrap;
   margin: 1em;
   background: $color-dark-primary;
@@ -356,13 +344,15 @@ div.info-cards {
   font-size: 18px;
   color: $color-light-primary;
 }
+
 .input-dark {
   color: $color-dark-primary;
 }
+
 .bookings-container {
   margin: 3em 1em;
   height: $secondary-size;
-  width: auto;
+  width: $auto-width;
   @include flex-column;
   overflow: scroll;
 }
@@ -386,7 +376,7 @@ div.info-cards {
   color: $color-dark-primary;
   font-size: 0.8em;
   margin: 1em 0;
-  width: auto;
+  width: $auto-width;
   height: 10em;
 }
 
@@ -415,13 +405,12 @@ div.info-cards {
 .card-left-side {
   @include flex-row;
 }
-///add reservatioin-manager
-
+//------Add-Reservatioin-Manager------//
 .manager-view__book-room {
   height: auto;
   @include flex-column;
   justify-content: space-around;
-  width: auto;
+  width: $auto-width;
   flex-wrap: wrap;
   margin: 1em;
   background: $color-white;
@@ -441,6 +430,11 @@ div.info-cards {
   font-size: 1.5vw;
 }
 
+#no-rooms-message-1 {
+  margin: auto 0.5em;
+  font-size: 1.2vw;
+}
+
 #manager-data-input {
   margin: 1em 1em 0em 0em;
 }
@@ -452,7 +446,7 @@ div.info-cards {
 .left-side-container {
   @include flex-column;
 }
-//
+
 .available-rooms-container {
   height: 40em;
   @include flex-row;
@@ -462,7 +456,6 @@ div.info-cards {
   margin: 3em auto;
   overflow: scroll;
 }
-
 
 .book-room-card {
   margin: 1em;
@@ -492,18 +485,18 @@ div.info-cards {
 }
 
 .room-btn {
-  height: 2em;
+  height: $box-height;
 }
 
 .room-btn-manager {
-  height: 2em;
+  height: $box-height;
 }
 
 .book-room-detail {
   margin: 1em auto;
 }
 
-//userview - info-cards
+//------Userview-Info-Cards-------//
 #customer-page {
   background-image: none !important;
   background: none !important;
@@ -517,7 +510,7 @@ div.info-cards {
   padding: 3em 0 0 0;
   @include flex-column;
   justify-content: space-around;
-  width: auto;
+  width: $auto-width;
   flex-wrap: wrap;
   margin: 0em 1em 1em 1em;
 }
@@ -528,12 +521,12 @@ div.info-cards {
   color: $color-light-primary;
 }
 
-//book a rooms
+//------Userview-Book-Rooms-------//
 .user-view__book-room {
   background-color: $color-white;
   margin: 1em 1em;
   padding: 1em 1em;
-  width: auto;
+  width: $auto-width;
   height: auto;
 }
 
@@ -542,11 +535,11 @@ div.info-cards {
 }
 
 #user-date-input {
-  margin: 1em 1em 0em 0em;
+  @include margin-input;
 }
 
 #user-room-input {
-  margin: 0em 1em 0em 0em;
+  @include margin-input;
 }
 
 #total-spent {

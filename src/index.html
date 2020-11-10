@@ -10,8 +10,6 @@
     <title>Overlook</title>
   </head>
   <body>
-    <!-- <img class='' id="login__background"src="../images/tokyo-city.jpg" alt="building-image"> -->
-    <!-- <h1>Webpack Starter Kit</h1> -->
     <nav id ="nav-bar" class="greeting hidden">
       <div id="manager-nav" class="greeting__nav hidden">
         <h1 id="welcome-title" class="navigation__item__title-light">WELCOME</h1>
@@ -31,7 +29,6 @@
       <button class="btn light-btn" id="log-out">Log Out</button>
     </nav>
   <article id="login-view" class="login-page">
-    <!-- <img src="../images/tokyo-city.jpg" alt="building-image"> -->
     <div class="login-page__box">
       <h2>Login</h2>
       <h3 id="login-error" class="hidden"></h3>
@@ -46,7 +43,7 @@
           <label class="login-label"id="password" for="password-input">Password</label>
           <div class="border"></div>
         </div>
-         <button id="login-button" class="btn">Log In</button>
+        <button id="login-button" class="btn">Log In</button>
       </form>
     </div>
   </article>
@@ -55,27 +52,25 @@
       <h2 class="view-headers-dark">Information for Today</h2>
       <div class="info-cards">
         <div class="card">
-          <div class="card-title">
-            <h3 class="card-title-light">TOTAL REVENUE</h3>
+          <div class="card__title">
+            <h3 class="card__title__light">TOTAL REVENUE</h3>
           </div>
-          <p id="today-date" class="card-info">11/03/2020</p>
-          <p id="today-revenue" class="card-info">$ <span id="today-revenue">20300</span></p>
+          <p id="today-date" class="card__info">11/03/2020</p>
+          <p id="today-revenue" class="card__info">$ <span id="today-revenue">20300</span></p>
         </div>
         <div class="card">
-          <div class="card-title">
-            <h3 class="card-title-light">AVAILABLE ROOMS</h3>
+          <div class="card__title">
+            <h3 class="card__title__light">AVAILABLE ROOMS</h3>
           </div>
-          <div class="card-info">
-          <p class="" id="available-rooms">50</p>
-        </div>
+          <div class="card__info">
+            <p class="" id="available-rooms">50</p>
+          </div>
         </div>
         <div class="card">
-          <div class="card-title">
-            <h3 class="card-title-light">Occupied vs Available Rooms</h3>
+          <div class="card__title">
+            <h3 class="card__title__light">Occupied vs Available Rooms</h3>
           </div>
-          <svg viewBox="0 0 36 36" class="circular-chart">
-            <!--Chart-->
-          </svg>
+          <svg viewBox="0 0 36 36" class="circular-chart"><!--Chart--></svg>
         </div>
       </div>
     </section>
@@ -86,6 +81,7 @@
         <label class="manager-form-titles" id="findBookingId" for="bookingIdInput">Booking ID</label>
         <input aria-labelledby="findBookingId" id="manager-booking-id" type="text" class="input-id" name="userBookingInput">
         <button id="delete-button" class="btn">DELETE</button>
+        <p id="no-rooms-message-1" class="hidden"></p>
       </form>
       <div class="user-info-details">
         <p class="manager-form-titles">Name:  <span id="user-name"></span></p>
@@ -116,21 +112,15 @@
         </div>
         <p id="no-rooms-message" class="hidden"></p>
       </div>
-        <div id="available-rooms-wrapper"class="available-rooms-container">
-          <!-- List-Available-Rooms -->
-        </div>
+        <div id="available-rooms-wrapper"class="available-rooms-container"><!-- List-Available-Rooms --></div>
     </section>
   </article>
-
   <article id="customer-page" class="user-view hidden">
     <section id="user-reservations" class="user-view__reservations">
       <h2 class="view-headers-dark user-header-light">Your Bookings</h2>
       <h2 id="total-spent" class="view-headers-dark user-header-light">Your Total Spend: $<span id="all-bookings-amount"></span></h2>
-      <div id="user-bookings-container" class="bookings-container">
-        <!-- List-of-Customer-Bookings-->
-      </div>
+      <div id="user-bookings-container" class="bookings-container"><!-- List-of-Customer-Bookings--></div>
     </section>
-
     <section id="user-book-room"class="user-view__book-room">
       <h1 class="title-text user-book-room-title">Book a Room</h1>
       <div class="user-info-details">
@@ -149,10 +139,7 @@
         </div>
         <p id="no-rooms-message-customer" class=""></p>
       </div>
-      <!-- <div class="available-rooms-container"> -->
-        <div id="user-available-rooms" class="available-rooms-container">
-          <!-- List-of-Available-Bookings-->
-        </div>
+        <div id="user-available-rooms" class="available-rooms-container"><!-- List-of-Available-Bookings--></div>
     </section>
   </article>
   </body>
