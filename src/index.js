@@ -21,30 +21,37 @@ let roomsData;
 let customerRepo;
 let bookingRepo;
 let roomRepo;
-let currentManager;
-let currentUser;
+let currentManager = {};
+let currentUser = {};
+let availableRooms = [];
 let hotelOverlook;
 
 let receivedUsersData = apiRequest.getHotelData('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users', 'users');
 let receivedBookingsData = apiRequest.getHotelData('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', 'bookings');
 let receivedRoomsData = apiRequest.getHotelData('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms', 'rooms');
 
-let listOfBookings = document.getElementById('manager-bookings-container');
-
 let loginBtn = document.getElementById('login-button');
 let logOutBtn = document.getElementById('log-out');
 let deleteBtn = document.getElementById('delete-button');
 
+let loginPageView = document.getElementById('login-view');
+let navBar = document.getElementById('nav-bar');
+let managerView = document.getElementById('manager-page');
+let managerNavBar = document.getElementById('manager-nav');
+let customerView = document.getElementById('customer-page');
+let customerNavBar = document.getElementById('user-nav');
 let managerUserIdInput = document.getElementById('manager-user-id');
-let availableRooms = [];
-
+let listOfAvailabelRooms = document.getElementById('available-rooms-wrapper');
+let customerAvailableRooms = document.getElementById('user-available-rooms');
+let listOfBookings = document.getElementById('manager-bookings-container');
 let customerDateInput = document.getElementById('user-date-input');
 let customerRoomTypeInput = document.getElementById('user-room-data');
 let managerRoomTypeInput = document.getElementById('manager-room-types');
-let customerReserveUserId = document.getElementById('manager-user-id-input');
 let managerDateInput = document.getElementById('manager-date-choice');
+let customerReserveUserId = document.getElementById('manager-user-id-input');
 let dropDownMenu = document.querySelectorAll('select');
 let today;
+
 let infoMessages = {
   errorSearch: `We apologize for the inconvinience,
                 there are no available rooms matching your search criterias.
@@ -55,7 +62,7 @@ let infoMessages = {
   errorLogin: 'You have entered an invalid username or password',
   confirmMessage: 'You successfully booked room #',
   confirmDelete: 'You successfully deleted booking #',
-  errorDelete: 'Check ID or status of the booking'
+  errorDelete: 'Check ID or status of the booking',
 }
 
 managerRoomTypeInput.addEventListener('change', filterAvailableRoomsTypeCustomer);
@@ -93,12 +100,12 @@ function logOutUsers() {
       textInput.value = "";
     })
   dropDownMenu.forEach(menu => {
-    menu.options[0].selected = 'selected'
+    menu.options[0].selected = 'selected';
   })
   currentUser = {};
   currentManager = {};
   domDisplay.hideLoginError();
-  domDisplay.displayLoginView();
+  domDisplay.displayLoginView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView);
 }
 
 function validateCustomerId(customerId) {
@@ -112,7 +119,7 @@ function validateCustomerId(customerId) {
 
 function handleManagerLogin() {
   currentManager = new Manager(roomRepo, bookingRepo, customerRepo);
-  domDisplay.displayManagerView();
+  domDisplay.displayManagerView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView);
   displayTotalRevenue(today);
   displayTotayDate();
   displayTotalAvailableRooms(today);
@@ -123,7 +130,7 @@ function handleManagerLogin() {
 
 function handleCustomerLogin(providedId) {
   currentUser = hotelOverlook.getInformationByValue(parseInt(providedId), customerRepo.customerRepo, 'id')[0];
-  domDisplay.displayCustomerView();
+  domDisplay.displayCustomerView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView);
   displayCustomerNameUserPage(providedId);
   let customerInfo = hotelOverlook.getInformationByValue(currentUser.id, bookingRepo.bookingRepo, 'userId');
   displayCustomerBookings(customerInfo, roomRepo, customerRepo);
@@ -132,7 +139,7 @@ function handleCustomerLogin(providedId) {
 }
 
 function checkUserLoginInfo(event) {
-  event.preventDefault()
+  event.preventDefault();
   let usernameValue = document.getElementById('username-value').value;
   let passwordValue = document.getElementById('password-value').value;
   if(passwordValue !== 'overlook2020') {
@@ -183,9 +190,9 @@ function displayBookings(bookings, roomRepo, userId, customerRepo) {
   listOfBookings.innerHTML = '';
   let cards = hotelOverlook.filterBookingByDate(hotelOverlook.getUserCardsRoomCards(bookings, roomRepo));
   displayCustomerTotalAmount(cards);
-  displayCustomerName(userId, customerRepo)
+  displayCustomerName(userId, customerRepo);
   cards.forEach(card => {
-    appendCard(listOfBookings, card)
+    appendCard(listOfBookings, card);
   });
 }
 
@@ -194,7 +201,7 @@ function displayCustomerBookings(bookings, roomRepo, customerRepo) {
   let customerBookingsContainer = document.getElementById('user-bookings-container');
   displayCustomerTotalUserPage(cards);
   cards.forEach(card => {
-    appendCard(customerBookingsContainer, card)
+    appendCard(customerBookingsContainer, card);
   });
 }
 
@@ -277,11 +284,7 @@ function getUserInfo() {
 function filterAvailableRoomsByDate() {
   if (this.value) {
     let newDate = this.value.replaceAll('-', '/');
-    availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
-    displayAvailbeRooms(availableRooms);
-    document.querySelectorAll('select').forEach(menu => {
-      menu.options[0].selected = 'selected'
-    })
+    validateTheUserInputDate(newDate, listOfAvailabelRooms, displayAvailbeRooms, 'no-rooms-message')
   } else {
     domDisplay.showErrorMessage(
       infoMessages.errorSearch, 'no-rooms-message', 'remove');
@@ -291,20 +294,30 @@ function filterAvailableRoomsByDate() {
 function filterAvailableRoomsByDateCustomer() {
   if (this.value) {
     let newDate = this.value.replaceAll('-', '/');
-    availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
-    displayAvailbeCustomerRooms(availableRooms);
-    document.querySelectorAll('select').forEach(menu => {
-      menu.options[0].selected = 'selected'
-    });
+    validateTheUserInputDate(newDate, customerAvailableRooms, displayAvailbeCustomerRooms, 'no-rooms-message-customer')
   } else {
     domDisplay.showErrorMessage(
       infoMessages.errorSearch, 'no-rooms-message-customer', 'remove');
   }
 }
 
+function validateTheUserInputDate(newDate, container, method, errorContainer) {
+  let userDateChoice = new Date(newDate + ' ').getTime();
+  if(userDateChoice < new Date(today).getTime()) {
+    container.innerHTML = '';
+    domDisplay.showErrorMessage(infoMessages.errorSearch, errorContainer, 'add');
+    container.innerText = "There are no available rooms for this date. Please choose the correct date"
+  }  else {
+    availableRooms = hotelOverlook.getAvailableRooms(bookingRepo.bookingRepo, roomRepo.roomRepo, newDate);
+    method(availableRooms);
+    document.querySelectorAll('select').forEach(menu => {
+      menu.options[0].selected = 'selected'
+    });
+  }
+}
+
 function displayAvailbeRooms(availableRooms) {
   let chosenDate = managerDateInput.value.replaceAll('-', '/');
-  const listOfAvailabelRooms = document.getElementById('available-rooms-wrapper');
   listOfAvailabelRooms.innerHTML = '';
   if(!availableRooms.length) {
     domDisplay.showErrorMessage(infoMessages.errorSearch, 'no-rooms-message', 'remove');
@@ -336,7 +349,6 @@ function addEventListenersToBook(buttonElement, method) {
 
 function displayAvailbeCustomerRooms(availableRooms) {
   let chosenDate = customerDateInput.value.replaceAll('-', '/');
-  let customerAvailableRooms = document.getElementById('user-available-rooms');
   customerAvailableRooms.innerHTML = '';
   if(!availableRooms.length) {
     domDisplay.showErrorMessage(infoMessages.errorSearch, 'no-rooms-message-customer', 'remove');
@@ -442,9 +454,9 @@ function filterAvailableRoomsTypeCustomer() {
   } else if (this.value === 'show all') {
     filteredRooms = availableRooms
   }
-  if(currentUser) {
+  if(Object.keys(currentUser).length > 0) {
     displayAvailbeCustomerRooms(filteredRooms);
-  } else {
+  } else if (Object.keys(currentUser).length === 0) {
     displayAvailbeRooms(filteredRooms);
   }
   return this.value;
