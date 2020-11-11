@@ -1,20 +1,45 @@
-# Webpack Starter Kit
+# Overlook - Turing Mod 2 Solo Project
 
-## Clone This Repo
+### [Link To My Repo](https://github.com/scripka/Overlook-project)
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### [Link To My Project Description](https://frontend.turing.io/projects/overlook.html)
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+---
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+## Table of Contents
+
+* [Project Overview](#project-overview)
+* [Goals](#goals)
+* [Technologies And Tools](#technologies-and-tools)
+* [Setup](#setup)
+* [Challenges](#challenges)
+* [Wins](#wins)
+* [ScreenShots and Demos](#screenshots-and-demos)
+* [Roadmap](#roadmap)
+* [Credits](#credits)
+
+## Project Overview
+
+The Overlook is a website which represents a hotel management tool for hotel customers and staff to manage room bookings and calculate customer bills.
+
+This project is aimed to display students' skills and knowledge received in MOD2, such as working confidently with API, Sass, Webpack chai spies, and the ability to create a responsive design that can be accessed from any device.
+
+## Goals
+
+My personal goal was to create a fully functional website that I wasn't able to create before in Mod1. With this project, I wanted to improve my javaScript skills and understanding of API and accessibility issues.
+
+## Technologies And Tools
+
+* JavaScript (ES6)
+* HTML
+* CSS/Scss/Sass
+* Adobe XD
+* Webpack
+* Chai spies
 
 ## Setup
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
 
 Then install the library dependencies. Run:
 
@@ -22,84 +47,166 @@ Then install the library dependencies. Run:
 npm install
 ```
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text, Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/`
 
-## Where to Add Your Code
+## Challenges
 
-### JavaScript
+My biggest challenges were creating a good simple code following SRP and DRY. I also had a struggle using ARIA and tab index to find the best spots where users would like to be on the website. Another thing was separating DOM manipulation from the index.js file. I was not able to find a better way to make it happen on time. There are still a lot of things that need to be improved in this project.
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+## Wins
 
-**Create all of your feature code files in the `src` directory.**
+Creating a responsive design where everything is functional.
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+## ScreenShots and Demos
 
 ---
 
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
+### Login Window
 
 ---
 
-## Linting Your Code
+![login page](https://media.giphy.com/media/E9ynnKHUbAF4I9Cz0t/giphy.gif)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
+<details>
+  <summary>**Under the Hood**</summary>
 
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
+There are two types of users: manager and customers. The login window checks both username and password information in order to switch to the next page
+following the simple if statement logic:
 
-## Webpack?
+```javaScript
+...
+    if (passwordValue !== 'overlook2020') {
+      domDisplay.showErrorMessage(infoMessages.errorLogin, 'login-error', 'remove');
+      return;
+    }
+    if (usernameValue === "manager") {
+     handleManagerLogin();
+    }
+    let customerUsername = usernameValue.split('').splice(0, 8).join('').toLowerCase();
+    let customerId = usernameValue.split('').splice(8).join('');
+    if (customerUsername === 'customer' && validateCustomerId(customerId)) {
+      handleCustomerLogin(customerId);
+    } else {
+      domDisplay.showErrorMessage(infoMessages.errorLogin, 'login-error', 'remove');
+    return;
+  }
+```
 
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
+</details>
 
-## Deploying to GitHub Pages
+---
 
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
+### Manager's Dashboard
 
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
+---
 
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+<details>
+  <summary>**Under the Hood**</summary>
+
+<img width="1420" alt="manager-dashboard-view" src="https://user-images.githubusercontent.com/66269306/98755476-db315d00-2385-11eb-8e1d-8e73c7a3f5cc.png">
+
+The first window element manager sees when logged in is the information dashboard, which consists of the following items:
+
+* Total revenue on today's date
+* Total number of available rooms
+* A chart that shows the percentage of available rooms
+
+The website updates the information every day based on today's date and the database updates.
+
+</details>
+
+---
+
+### Customers' Bookings
+
+---
+
+![gif-customer-bookings](https://media.giphy.com/media/uB04rWdbF1SaK6g0Ct/giphy.gif)
+
+
+<details>
+  <summary>**Under the Hood**</summary>
+
+Manager View:
+
+* Manager can search for a specific Customer to look up the information about their reservations and the total amount they spent. User ID is required to display the information.
+* Manager has a "delete" feature that allows them to delete only 'upcoming' reservations by entering the booking ID. Booking ID is required.
+
+Customer View:
+
+* When customers are logged in, they can see their name, their total spend on all bookings, and individual bookings they had so far
+
+```javaScript
+
+let miniBookingCard =
+
+    `<div id="booking-${card.bookingId}" class="card-container">
+      <div class="booking-card">
+        <div class="card-left-side">
+          <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+          <div class="card-details">
+            <p class="room-detail">Reservation ID: "${card.bookingId}"</p>
+            <p class="room-detail">Room Type: ${card.roomType}</p>
+            <p class="room-detail">Date: <span id="date-booking">${card.bookingDate}</span></p>
+            <p class="room-detail">${card.status}</p>
+          </div>
+        </div>
+        <div class="card-right-side">
+          <div class="cr-price">$ <span id="price-booking">${card.price}</span></div>
+        </div>
+       </div>
+    </div>
+    `
+
+```
+
+</details>
+
+---
+
+### Booking a room
+
+---
+
+![gif-make-reservation-view](https://media.giphy.com/media/uB04rWdbF1SaK6g0Ct/giphy.gif)
+
+<details>
+  <summary>**Under the Hood**</summary>
+
+Manager View:
+
+* To make a reservation Manager has to provide the date and User ID, otherwise the website will throw a message to check the entries
+
+Customer View:
+
+* Customers only need to provide the date in the future when rooms are available to make a reservation
+
+Both users can filter through the available rooms by their type.
+When the 'book' button is clicked the confirmation message pops up to verify that a chosen room is the room that needs to be booked. Users get a confirmation message after a successful booking.
+
+</details>
+
+---
+
+## Roadmap
+
+* Improve performance of the website to load and update info faster
+* Add feature to filter available rooms by the number of beds, and price
+* Improve design to have a better UX by adding hover and focus effects
+* Add feature to add room service charges to bookings
+* Improve index.js readability and SRP
+* Organize DOM manipulation to have a better organization
+
+## Credits
+
+<img src="https://avatars0.githubusercontent.com/u/66269306?s=400&u=b59f8ccc1002269319d952aa028ee270629b2ead&v=4" alt="Olga Morgan"
+ width="150" height="auto" />\
+
+**Olga Morgan**
+[GitHub Profile](https://github.com/scripka)
+
+<img src="https://avatars2.githubusercontent.com/u/68264128?s=460&u=5e1c7200a4a593246ef55c53a1cf0e71b5f2adfa&v=4" alt="Olga Morgan"
+ width="150" height="auto" />\
+
+**Lola Dolinsky**
+[GitHub Profile](https://github.com/lo-la-do-li)
