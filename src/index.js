@@ -323,7 +323,7 @@ function displayAvailbeRooms(availableRooms) {
     let miniRoomCard =
 
       `<div id="${card.number}" class="book-room-card">
-        <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+        <img class="book-room-img" src="./images/night-city.jpg" alt="building-image">
         <div class="book-card-details">
           <p class="book-room-detail">Room #<span id="room-number">${card.number}</p>
           <p class="book-room-detail">1 night $<span id="room-per-night">${card.costPerNight}</span></p>
@@ -353,7 +353,7 @@ function displayAvailbeCustomerRooms(availableRooms) {
     let miniRoomCard =
 
       `<div id="${card.number}" class="book-room-card">
-        <img class="book-room-img" src="../images/tokyo-city.jpg" alt="building-image">
+        <img class="book-room-img" src="./images/night-city.jpg" alt="building-image">
         <div class="book-card-details">
           <p class="book-room-detail">Room #<span id="room-number">${card.number}</p>
           <p class="book-room-detail">1 night $<span id="room-per-night">${card.costPerNight}</span></p>
