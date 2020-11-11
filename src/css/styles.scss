@@ -34,7 +34,6 @@ html {
     height: $full-height;
     margin: inherit;
     font-family: 'Quicksand';
-    // background: url("../images/tokyo-city.jpg") no-repeat center center fixed;
     background: url("../images/night-city.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -211,6 +210,10 @@ h3 {
   border-bottom: 1px solid $color-light-primary;
 }
 
+.navigation__item__title-light:focus {
+  border-bottom: 1px solid $color-light-primary;
+}
+
 .manager-view__information {
   @include flex-column;
   width: $auto-width;
@@ -260,6 +263,10 @@ div.info-cards {
     @include flex-row;
     justify-content: center;
   }
+}
+
+.card:focus {
+  box-shadow: 4px 3px 4px $color-dark-primary;
 }
 
 #today-date {

@@ -14,16 +14,16 @@
       <div id="manager-nav" class="greeting__nav hidden">
         <h1 id="welcome-title" class="navigation__item__title-light">WELCOME</h1>
         <ul class="navigation__list">
-          <li class="navigation__item"><a href="#manager-dashboard" class="navigation__item__title-light" tabindex="0">Dashboard</a></li>
-          <li class="navigation__item"><a href="#manager-user-information" class="navigation__item__title-light" tabindex="0">Users</a></li>
-          <li class="navigation__item"><a href="#manager-book-room" class="navigation__item__title-light" tabindex="0">Book</a></li>
+          <li class="navigation__item" tabindex="0"><a href="#manager-dashboard" class="navigation__item__title-light">Dashboard</a></li>
+          <li class="navigation__item" tabindex="0"><a href="#manager-user-information" class="navigation__item__title-light">Users</a></li>
+          <li class="navigation__item" tabindex="0"><a href="#manager-book-room" class="navigation__item__title-light">Book</a></li>
         </ul>
       </div>
       <div id="user-nav" class="greeting__nav hidden">
         <h1 id="user-title" class="navigation__item__title-light">Mike Wazowski</h1>
         <ul class="navigation__list">
-          <li class="navigation__item"><a href="#user-reservations" class="navigation__item__title-light" tabindex="0">Dashboard</a></li>
-          <li class="navigation__item"><a href="#user-book-room" class="navigation__item__title-light" tabindex="0">Book</a></li>
+          <li class="navigation__item" tabindex="0"><a href="#user-reservations" class="navigation__item__title-light">Dashboard</a></li>
+          <li class="navigation__item" tabindex="0"><a href="#user-book-room" class="navigation__item__title-light">Book</a></li>
         </ul>
       </div>
       <button class="btn light-btn" id="log-out" tabindex="0">Log Out</button>
@@ -87,7 +87,7 @@
         <p class="manager-form-titles">Total amount:  $<span id="user-total">0.00</span></p>
         <p id="no-rooms-message-1" class="hidden"></p>
       </div>
-      <div id="manager-bookings-container" class="bookings-container">
+      <div id="manager-bookings-container" class="bookings-container" tabindex="0">
         <p id="bookings-error"></p>
       </div>
     </section>
@@ -119,7 +119,7 @@
     <section id="user-reservations" class="user-view__reservations">
       <h2 class="view-headers-dark user-header-light">Your Bookings</h2>
       <h2 id="total-spent" class="view-headers-dark user-header-light">Your Total Spend: $<span id="all-bookings-amount"></span></h2>
-      <div id="user-bookings-container" class="bookings-container"><!-- List-of-Customer-Bookings--></div>
+      <div id="user-bookings-container" class="bookings-container" tabindex="0"><!-- List-of-Customer-Bookings--></div>
     </section>
     <section id="user-book-room"class="user-view__book-room">
       <h1 class="title-text user-book-room-title">Book a Room</h1>
