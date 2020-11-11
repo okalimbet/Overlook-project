@@ -11,7 +11,6 @@ describe('Room', function() {
   });
 
   it('should be a function', () => {
-    const roomOne = new Room();
     expect(Room).to.be.a('function');
   });
 
@@ -55,8 +54,6 @@ describe('Room', function() {
   });
 
   it('should return main room information ', function() {
-    const numOfNights = 4;
-
     expect(room.getMainRoomInformation()).to.deep.equal({
       'Room number': 1,
       'Room type': 'residential suite',

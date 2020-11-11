@@ -6,28 +6,24 @@ import Room from '../src/Room'
 import RoomRepo from '../src/RoomRepo'
 import Customer from '../src/Customer'
 import CustomerRepo from '../src/CustomerRepo'
-import Manager from '../src/Manager';
 import Hotel from '../src/Hotel';
 
 describe('Hotel', function() {
   let booking1,
-      booking2,
-      booking3,
-      bookings,
-      bookingRepo,
-      room1,
-      room2,
-      room3,
-      room4,
-      room5,
-      rooms,
-      roomRepo,
-      customer1,
-      customer2,
-      customers,
-      customerRepo,
-      manager,
-      hotel;
+    booking2,
+    bookings,
+    bookingRepo,
+    room1,
+    room2,
+    room3,
+    room4,
+    rooms,
+    roomRepo,
+    customer1,
+    customer2,
+    customers,
+    customerRepo,
+    hotel;
 
   beforeEach(function() {
     customer1 = new Customer(1, 'Lisa Kawalski');
@@ -47,7 +43,6 @@ describe('Hotel', function() {
     bookings = [booking1, booking2];
     bookingRepo = new BookingRepo(bookings);
 
-    manager = new Manager(bookingRepo, roomRepo, customerRepo)
     hotel = new Hotel(bookingRepo.bookingRepo, roomRepo.roomRepo, customerRepo.customerRepo)
   });
 
@@ -72,7 +67,12 @@ describe('Hotel', function() {
   });
 
   it('should get available Rooms on the certain date', () => {
-    expect(hotel.getTodayDate()).to.equal('2020/11/08')
+    let todayDate = new Date();
+    let date = ("0" + todayDate.getDate()).slice(-2);
+    let month = ("0" + (todayDate.getMonth() + 1)).slice(-2);
+    let year = todayDate.getFullYear();
+    let today = `${year}/${month}/${date}`;
+    expect(hotel.getTodayDate()).to.equal(today)
   });
 
   it('should get available Rooms on the certain date', () => {
@@ -93,7 +93,7 @@ describe('Hotel', function() {
       price: 300.2,
       status: 'Completed'
     },
-      {
+    {
       bookingId: "5fwrgu4i7k55hl6t5",
       roomType: "residential suite",
       bookingDate: "2020/02/10",

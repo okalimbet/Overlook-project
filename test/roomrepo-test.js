@@ -5,11 +5,11 @@ import RoomRepo from '../src/RoomRepo';
 
 describe('RoomRepo', function() {
   let room1,
-      room2,
-      room3,
-      room4,
-      rooms,
-      roomRepo;
+    room2,
+    room3,
+    room4,
+    rooms,
+    roomRepo;
 
   beforeEach(function() {
     room1 = new Room(1, "residential suite", false, "queen", 3, 358.4);
@@ -21,7 +21,6 @@ describe('RoomRepo', function() {
   });
 
   it('should be a function', () => {
-    const roomRepoOne = new RoomRepo();
     expect(RoomRepo).to.be.a('function');
   });
 

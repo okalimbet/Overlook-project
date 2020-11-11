@@ -1,11 +1,20 @@
 $color-dark-blue: #01161E;
 $color-dark-primary: #124559;
 $color-light-primary: #EFF6E0;
-$color-white: #FFFF;
-$color-secondary-middle-tone: #598392;
+$color-white: rgba(255, 255, 255, 0.92);
+$color-secondary-middle-tone: #AEC3B0;
 
 $primary-size: 20em;
 $secondary-size: 30em;
 
 $full-width: 100%;
+$auto-width: auto;
 $full-height: 100%;
+$box-height: 2em;
+
+$today-font: 1.5em;
+
+$margin-primary: 1em;
+$margin-auto-sides: auto 1em;
+$margin-auto-top-bot: 1em auto;
+$padding-primary: 1em;

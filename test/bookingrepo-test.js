@@ -5,9 +5,9 @@ import Booking from '../src/Booking';
 
 describe('BookingRepo', function() {
   let bookingRepo,
-      booking1,
-      booking2,
-      bookings;
+    booking1,
+    booking2,
+    bookings;
 
   beforeEach(function() {
     booking1 = new Booking("5fwrgu4i7k55hl7q8", 43, "2020/01/24", 24);
@@ -17,7 +17,6 @@ describe('BookingRepo', function() {
   });
 
   it('should be a function', () => {
-    const bookingRepoOne = new BookingRepo();
     expect(BookingRepo).to.be.a('function');
   });
 

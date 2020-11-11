@@ -12,8 +12,7 @@ function getHotelData(url, dataType) {
 }
 
 function makeAPostRequest(url, dataToPost) {
-  console.log(dataToPost)
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -25,7 +24,7 @@ function makeAPostRequest(url, dataToPost) {
 }
 
 function makeADeleteRequest(url, dataToDelete) {
-  fetch(url, {
+  return fetch(url, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'

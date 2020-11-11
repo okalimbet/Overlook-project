@@ -1,22 +1,6 @@
-
-let loginPageView = document.getElementById('login-view');
-let navBar = document.getElementById('nav-bar');
-
-let managerView = document.getElementById('manager-page');
-let managerNavBar = document.getElementById('manager-nav');
-
-let customerView = document.getElementById('customer-page');
-let customerNavBar = document.getElementById('user-nav');
-
-let loginBtn = document.getElementById('login-button');
-let logOutBtn = document.getElementById('log-out');
-
-let username = document.getElementById('username-value');
-let password = document.getElementById('password-value');
-
 let domDisplay = {
 
-  displayManagerView() {
+  displayManagerView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView) {
     navBar.classList.remove('hidden');
     managerView.classList.remove('hidden');
     managerNavBar.classList.remove('hidden');
@@ -25,7 +9,7 @@ let domDisplay = {
     loginPageView.classList.add('hidden');
   },
 
-  displayLoginView() {
+  displayLoginView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView) {
     navBar.classList.add('hidden');
     managerView.classList.add('hidden');
     managerNavBar.classList.add('hidden');
@@ -34,7 +18,7 @@ let domDisplay = {
     loginPageView.classList.remove('hidden');
   },
 
-  displayCustomerView() {
+  displayCustomerView(navBar, managerView, managerNavBar, customerView, customerNavBar, loginPageView) {
     navBar.classList.remove('hidden');
     managerView.classList.add('hidden');
     managerNavBar.classList.add('hidden');

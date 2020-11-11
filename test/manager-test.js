@@ -10,22 +10,20 @@ import Manager from '../src/Manager';
 
 describe('Manager', function() {
   let booking1,
-      booking2,
-      booking3,
-      bookings,
-      bookingRepo,
-      room1,
-      room2,
-      room3,
-      room4,
-      room5,
-      rooms,
-      roomRepo,
-      customer1,
-      customer2,
-      customers,
-      customerRepo,
-      manager;
+    booking2,
+    bookings,
+    bookingRepo,
+    room1,
+    room2,
+    room3,
+    room4,
+    rooms,
+    roomRepo,
+    customer1,
+    customer2,
+    customers,
+    customerRepo,
+    manager;
 
   beforeEach(function() {
     customer1 = new Customer(1, 'Lisa Kawalski');

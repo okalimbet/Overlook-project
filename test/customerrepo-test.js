@@ -5,9 +5,9 @@ import Customer from '../src/Customer';
 
 describe('CustomerRepo', function() {
   let customer1,
-      customer2,
-      customers,
-      customerRepo;
+    customer2,
+    customers,
+    customerRepo;
 
   beforeEach(function() {
     customer1 = new Customer(1, 'Lisa Kawalski');
