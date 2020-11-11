@@ -211,7 +211,7 @@ function appendCard(container, card) {
     `<div id="booking-${card.bookingId}" class="card-container">
       <div class="booking-card">
         <div class="card-left-side">
-          <img class="room-img" src="../images/tokyo-city.jpg" alt="building-image">
+          <img class="room-img" src="./images/tokyo-city.jpg" alt="building-image">
           <div class="card-details">
             <p class="room-detail">Reservation ID: "${card.bookingId}"</p>
             <p class="room-detail">Room Type: ${card.roomType}</p>
