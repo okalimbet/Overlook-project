@@ -13,9 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/scripka/Overlook-project.git",
-    "homepage": "http://scripka.github.io/Overlook-project"
+    "url": "git+https://github.com/scripka/Overlook-project.git"
   },
+  "homepage": "http://scripka.github.io/Overlook-project",
   "author": "Turing School of Software and Design",
   "license": "MIT",
   "devDependencies": {
