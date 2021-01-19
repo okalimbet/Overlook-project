@@ -49,6 +49,14 @@ npm install
 
 To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/`
 
+manager account:
+  username: manager
+  password: overlook2020
+
+user account:
+  username: customer[1-50]
+  password: overlook2020
+
 ## Challenges
 
 My biggest challenges were creating a good simple code following SRP and DRY. I also had a struggle using ARIA and tab index to find the best spots where users would like to be on the website. Another thing was separating DOM manipulation from the index.js file. I was not able to find a better way to make it happen on time. There are still a lot of things that need to be improved in this project.
