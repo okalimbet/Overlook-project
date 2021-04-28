@@ -32,7 +32,7 @@ My personal goal was to create a fully functional website that I wasn't able to 
 
 * JavaScript (ES6)
 * HTML
-* CSS/Scss/Sass
+* CSS/Scss
 * Adobe XD
 * Webpack
 * Chai spies
